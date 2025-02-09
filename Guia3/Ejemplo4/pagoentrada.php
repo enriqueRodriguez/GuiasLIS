@@ -178,7 +178,7 @@
                 ?>
                 </tbody>
             </table>
-            <a href="ejemplo4.php">Ingresar otra película</a>
+            <a href="index.php">Ingresar otra película</a>
         </div>
 </body>
 
