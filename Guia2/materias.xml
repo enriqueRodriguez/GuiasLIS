@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<materias>
+  <materia>
+    <codigo>LIC</codigo>
+    <nombre>Lenguajes interpretados en el cliente</nombre>
+    <uvs>3</uvs>
+    <nota>10</nota>
+  </materia>
+  <materia>
+    <codigo>LIS</codigo>
+    <nombre>Lenguajes Interpretados en el Servidor</nombre>
+    <uvs>4</uvs>
+    <nota>8</nota>
+  </materia>
+  
+</materias>
