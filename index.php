@@ -17,14 +17,14 @@
     </header>
 
     <div class="container mt-5">
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-md-6">
                 <div class="card shadow-lg">
                     <div class="card-header bg-primary text-white">
                         Guía 1
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Ejemplos y ejercicios Guia 1</p>
+                        <p class="card-text">Ejemplos y Complementario Guia 1</p>
                         <a href="" class="btn btn-secondary" target="_blank">Ejercicio 1</a>
                         <a href="" class="btn btn-secondary" target="_blank">Ejercicio 2</a>
                     </div>
@@ -36,7 +36,7 @@
                         Guía 2
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Ejemplos y ejercicios Guia 2.</p>
+                        <p class="card-text">Ejemplos y Complementario Guia 2</p>
                         <a href="" class="btn btn-secondary" target="_blank">Ejercicio 1</a>
                         <a href="" class="btn btn-secondary" target="_blank">Ejercicio 2</a>
                     </div>
@@ -50,7 +50,7 @@
                         Guía 3
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Ejemplos y ejercicios Guia 3.</p>
+                        <p class="card-text">Ejemplos y Complementario Guia 3</p>
                         <a href="Guia3/Ejemplo1/ejemplo1.php" class="btn btn-secondary" target="_blank">Ejemplo 1</a>
                         <a href="Guia3/Ejemplo2/ejemplo2.php" class="btn btn-secondary" target="_blank">Ejemplo 2</a>
                         <a href="Guia3/Ejemplo3/index.html" class="btn btn-secondary" target="_blank">Ejemplo 3</a>
@@ -58,6 +58,21 @@
                         <a href="Guia3/Ejercicio1/arreglos.php" class="btn btn-secondary" target="_blank">Ejercicio Clase 1</a>
                         <a href="Guia3/Ejercicio2/multidimensionales.php" class="btn btn-secondary" target="_blank">Ejercicio Clase 2</a>
                         <a href="Guia3/Discusion/index.php" class="btn btn-secondary" target="_blank">Ejercicio Discusión</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white">
+                        Guía 4
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Ejemplos y Complementario Guia 4</p>
+                        <a href="Guia4/Ejemplo1/monedas.php" class="btn btn-secondary" target="_blank">Ejemplo 1</a>
+                        <a href="Guia4/Ejemplo2/fibonacci.php" class="btn btn-secondary" target="_blank">Ejemplo 2</a>
+                        <a href="Guia4/Ejemplo3/elmayor.php" class="btn btn-secondary" target="_blank">Ejemplo 3</a>
+                        <a href="Guia4/Ejemplo4/selectfields.html" class="btn btn-secondary" target="_blank">Ejemplo 4</a>
+                        <a href="Guia4/Complementario/conversiones.php" class="btn btn-secondary" target="_blank">Ejercicio Complementario</a>
                     </div>
                 </div>
             </div>
