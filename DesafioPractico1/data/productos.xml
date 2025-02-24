@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<productos>
+  <producto codigo="PROD00002">
+    <nombre>Taza Térmica</nombre>
+    <descripcion>Taza térmica de acero inoxidable con capacidad de 500ml</descripcion>
+    <imagen>uploads/productos/taza_termica.png</imagen>
+    <categoria>Promocional</categoria>
+    <precio>12.50</precio>
+    <existencias>50</existencias>
+  </producto>
+  <producto codigo="PROD00003">
+    <nombre>Camiseta de Algodón Unisex</nombre>
+    <descripcion>Camiseta básica de algodón 100% con ajuste cómodo, ideal para uso diario. Disponible en varios colores.</descripcion>
+    <categoria>Textil</categoria>
+    <precio>12.99</precio>
+    <existencias>4</existencias>
+    <imagen>uploads/productos/PROD00003_1740375633.jpg</imagen>
+  </producto>
+  <producto codigo="PROD00004">
+    <nombre>Sudadera con Capucha Premium</nombre>
+    <descripcion>Sudadera gruesa con interior afelpado, perfecta para el invierno. Cuenta con bolsillos frontales y capucha ajustable.</descripcion>
+    <categoria>Textil</categoria>
+    <precio>34.99</precio>
+    <existencias>2</existencias>
+    <imagen>uploads/productos/PROD00004_1740375690.jpg</imagen>
+  </producto>
+  <producto codigo="PROD00005">
+    <nombre>Pantalón Deportivo de Poliéster</nombre>
+    <descripcion>Pantalón ligero y transpirable, ideal para entrenamiento o descanso en casa.</descripcion>
+    <categoria>Textil</categoria>
+    <precio>22.50</precio>
+    <existencias>5</existencias>
+    <imagen>uploads/productos/PROD00005_1740375847.jpg</imagen>
+  </producto>
+  <producto codigo="PROD00006">
+    <nombre>Bufanda de Lana Hecha a Mano</nombre>
+    <descripcion>Bufanda tejida a mano con lana de alta calidad, brinda calidez y estilo en los días fríos.</descripcion>
+    <categoria>Textil</categoria>
+    <precio>18.75</precio>
+    <existencias>0</existencias>
+    <imagen>uploads/productos/PROD00006_1740375947.jpg</imagen>
+  </producto>
+  <producto codigo="PROD00007">
+    <nombre>Blusa de Lino para Mujer</nombre>
+    <descripcion>Blusa fresca y ligera de lino, ideal para climas cálidos y looks casuales elegantes.</descripcion>
+    <categoria>Textil</categoria>
+    <precio>28.90</precio>
+    <existencias>3</existencias>
+    <imagen>uploads/productos/PROD00007_1740376023.jpg</imagen>
+  </producto>
+  <producto codigo="PROD00008">
+    <nombre>Shorts de Mezclilla Clásicos</nombre>
+    <descripcion>Shorts de mezclilla con diseño clásico y ajuste cómodo, perfectos para cualquier ocasión casual.</descripcion>
+    <categoria>Textil</categoria>
+    <precio>19.99</precio>
+    <existencias>0</existencias>
+    <imagen>uploads/productos/PROD00008_1740376107.jpg</imagen>
+  </producto>
+  <producto codigo="PROD00009">
+    <nombre>Gorro de Invierno de Punto</nombre>
+    <descripcion>Gorro de punto elástico que se adapta a cualquier tamaño de cabeza, ideal para protegerse del frío.</descripcion>
+    <categoria>Textil</categoria>
+    <precio>14.50</precio>
+    <existencias>6</existencias>
+    <imagen>uploads/productos/PROD00009_1740376182.jpg</imagen>
+  </producto>
+  <producto codigo="PROD00010">
+    <nombre>Pijama de Algodón</nombre>
+    <descripcion>Conjunto de pijama con tela suave y transpirable, perfecto para una noche de descanso.</descripcion>
+    <categoria>Textil</categoria>
+    <precio>29.99</precio>
+    <existencias>1</existencias>
+    <imagen>uploads/productos/PROD00010_1740376304.jpg</imagen>
+  </producto>
+  <producto codigo="PROD00011">
+    <nombre>Bolsas Ecológicas Reutilizables</nombre>
+    <descripcion>Bolsas de tela ecológica perfectas para compras o eventos promocionales. Se pueden personalizar con el logo de la empresa.</descripcion>
+    <categoria>Promocional</categoria>
+    <precio>4.99</precio>
+    <existencias>3</existencias>
+    <imagen>uploads/productos/PROD00011_1740376472.jpg</imagen>
+  </producto>
+  <producto codigo="PROD00012">
+    <nombre>Toallas Deportivas con Logo</nombre>
+    <descripcion>Toallas absorbentes ideales para gimnasios y eventos deportivos. Se pueden personalizar con serigrafía o bordado.</descripcion>
+    <categoria>Promocional</categoria>
+    <precio>6.75</precio>
+    <existencias>0</existencias>
+    <imagen>uploads/productos/PROD00012_1740376541.jpg</imagen>
+  </producto>
+  <producto codigo="PROD00013">
+    <nombre>Llaveros de Tela Personalizados</nombre>
+    <descripcion>Llaveros fabricados en tela resistente con opción de bordado o estampado. Ideales para promocionar marcas y eventos.</descripcion>
+    <categoria>Promocional</categoria>
+    <precio>3.50</precio>
+    <existencias>4</existencias>
+    <imagen>uploads/productos/PROD00013_1740376617.jpg</imagen>
+  </producto>
+  <producto codigo="PROD00014">
+    <nombre>Delantales Promocionales</nombre>
+    <descripcion>Delantales de tela resistentes, perfectos para restaurantes, eventos gastronómicos o promociones de marca. Se pueden personalizar con bordado o serigrafía.</descripcion>
+    <categoria>Promocional</categoria>
+    <precio>10.50</precio>
+    <existencias>5</existencias>
+    <imagen>uploads/productos/PROD00014_1740376813.jpg</imagen>
+  </producto>
+</productos>
