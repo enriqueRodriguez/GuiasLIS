@@ -77,6 +77,19 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white">
+                        Desafio Practico 1
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Primer Desafio</p>
+                        <a href="DesafioPractico1/" class="btn btn-secondary" target="_blank">Desafio Practico</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
