@@ -89,6 +89,22 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white">
+                        Guía 6
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Ejemplos y Complementarios Guia 6</p>
+                        <a href="Guia6/Ejemplo1/autospoo.php" class="btn btn-secondary" target="_blank">Ejemplo 1</a>
+                        <a href="Guia6/Ejemplo2/bankform.php" class="btn btn-secondary" target="_blank">Ejemplo 2</a>
+                        <a href="Guia6/Ejemplo3/sueldoneto.php" class="btn btn-secondary" target="_blank">Ejemplo 3</a>
+                        <a href="Guia6/Ejemplo4/distanciadospuntos.php" class="btn btn-secondary" target="_blank">Ejemplo 4</a>
+                        <a href="Guia6/Ejercicio1/autospoo.php" class="btn btn-secondary" target="_blank">Ejercicio Complementario 1</a>
+                        <a href="Guia6/Ejercicio2/sueldoneto.php" class="btn btn-secondary" target="_blank">Ejercicio Complementario 2</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
