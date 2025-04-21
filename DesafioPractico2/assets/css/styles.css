@@ -1,0 +1,453 @@
+/* Variables de color */
+:root {
+    --primary-color: #2c3e50;
+    /* Azul oscuro corporativo */
+    --secondary-color: #3498db;
+    /* Azul claro acento */
+    --accent-color: #e67e22;
+    /* Naranja para llamadas a la acción */
+    --light-color: #ecf0f1;
+    /* Gris muy claro para fondos */
+    --dark-color: #2c3e50;
+    /* Azul oscuro para textos */
+    --success-color: #27ae60;
+    /* Verde para botones de acción positiva */
+}
+
+/* Personalización de la barra de navegación */
+.navbar-dark.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.btn-outline-light:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+/* Sección principal */
+.hero-section {
+    background-color: var(--light-color);
+    padding: 4rem 0;
+    margin-bottom: 30px;
+}
+
+.hero-section h1 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.hero-section .lead {
+    color: var(--dark-color);
+}
+
+/* Personalización de tarjetas */
+.access-card {
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    border: none;
+    max-width: 350px;
+    margin: 0 auto;
+    margin-top: 100px;
+    z-index: 2;
+    position: relative;
+    pointer-events: auto;
+}
+
+.access-card:hover {
+    transform: translateY(-5px);
+}
+
+.access-card .card-body {
+    padding: 2rem;
+    pointer-events: auto;
+}
+
+.access-card .card-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.access-card .card-text {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.access-card .btn {
+    padding: 0.5rem 2rem;
+}
+
+.access-card .btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+    transition: all 0.3s ease;
+}
+
+.access-card .btn-success:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Personalización del pie de página */
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+    background-color: var(--primary-color) !important;
+    color: var(--light-color);
+}
+
+/* Estilos para el modal de productos */
+.modal-body img {
+    max-height: 400px;
+    width: 100%;
+    object-fit: contain;
+    background-color: #f8f9fa;
+    padding: 1rem;
+}
+
+.modal-body .alert {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Estilos para las tarjetas de productos */
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, .125);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    height: 300px;
+    /* Altura fija para todas las imágenes */
+    /* Mantiene la proporción y centra la imagen */
+    /* Fondo claro para imágenes transparentes */
+    /* Espaciado interno */
+}
+
+/* Ajustes para las miniaturas de productos */
+.card-image-wrapper {
+    height: 250px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+/* Estilos para el layout principal */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contenido principal */
+main {
+    flex: 1 0 auto;
+}
+
+/* Estilos para el carrusel */
+.carousel-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-background .carousel {
+    height: 100%;
+}
+
+.carousel-background .carousel-inner {
+    height: 100%;
+}
+
+.carousel-background .carousel-item {
+    height: 100%;
+}
+
+.carousel-background img {
+    object-fit: cover;
+    height: 100%;
+    filter: brightness(0.7);
+}
+
+.position-relative {
+    position: relative;
+    height: 400px;
+}
+
+/* Controles del carrusel */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 10%;
+    opacity: 0.8;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 3rem;
+    height: 3rem;
+}
+
+.carousel-indicators {
+    bottom: 0;
+    z-index: 5;
+}
+
+.carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 0 4px;
+}
+
+/* Contenedor de la tarjeta con eventos de puntero */
+.row.justify-content-center {
+    position: relative;
+    z-index: 2;
+}
+
+/* Personalización del inicio de sesión */
+.login-container {
+    position: relative;
+    z-index: 100;
+    /* Índice Z aumentado significativamente */
+    pointer-events: auto !important;
+    /* Forzar eventos de puntero */
+}
+
+.login-card {
+    backdrop-filter: blur(5px);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 0 auto;
+    pointer-events: auto !important;
+}
+
+.login-card .card-body {
+    pointer-events: auto !important;
+}
+
+/* Estilos específicos del carrusel */
+.home-page .carousel-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.home-page .row.justify-content-center {
+    pointer-events: none;
+}
+
+/* Asegurar que los elementos sean clicables */
+input,
+button,
+a {
+    pointer-events: auto !important;
+}
+
+/* Estilos de inicio de sesión */
+.login-container {
+    position: relative;
+    z-index: 100;
+}
+
+.login-card {
+    backdrop-filter: blur(5px);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+}
+
+.bg-login {
+    min-height: 100vh;
+    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Estilos de la página de administración */
+.admin-page .hero-section {
+    background-color: #f8f9fa;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+}
+
+.admin-page .admin-card {
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.admin-page .table img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.admin-page .table {
+    margin-bottom: 0;
+}
+
+.admin-page .modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.admin-page .modal-header {
+    background-color: #f8f9fa;
+    border-radius: 10px 10px 0 0;
+}
+
+.admin-page .img-thumbnail {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de botones */
+.admin-page .btn {
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+}
+
+.admin-page .btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.admin-page .btn-warning {
+    color: #fff;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.admin-page .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Controles de formulario */
+.admin-page .form-control,
+.admin-page .form-select {
+    border-radius: 5px;
+    border: 1px solid #dee2e6;
+    padding: 0.5rem 0.75rem;
+}
+
+.admin-page .form-control:focus,
+.admin-page .form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25);
+}
+
+/* Diseño de la página de administración */
+.admin-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.admin-page main {
+    flex: 1 0 auto;
+    padding-bottom: 2rem;
+}
+
+.admin-page footer {
+    flex-shrink: 0;
+    margin-top: auto;
+    background-color: #f8f9fa;
+}
+
+.admin-page .table-responsive {
+    overflow-x: auto;
+    min-height: .01%;
+    margin-bottom: 1rem;
+}
+
+/* Asegurar espaciado correcto */
+.admin-page .container.my-5 {
+    margin-bottom: 6rem !important;
+}
+
+.admin-page .pagination {
+    margin-bottom: 0;
+    margin-top: 1.5rem;
+}
+
+.admin-page .pagination .page-link {
+    color: #0d6efd;
+    border-radius: 0;
+    padding: 0.5rem 1rem;
+}
+
+.admin-page .pagination .page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+}
+
+.admin-page .pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+.product-count {
+    text-align: center;
+    color: #6c757d;
+    margin-top: 1rem;
+}
