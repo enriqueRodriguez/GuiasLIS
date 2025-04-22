@@ -6,9 +6,9 @@ class TipoUsuarioController extends Controller
 {
     private $model;
 
-    public function __construct($pdo)
+    public function __construct()
     {
-        $this->model = new TipoUsuario($pdo);
+        $this->model = new TipoUsuario();
     }
 
     public function index()

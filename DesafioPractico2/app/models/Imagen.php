@@ -1,31 +1,20 @@
 <?php
-require_once __DIR__ . '/../utils/database.php';
+require_once __DIR__ . '/model.php';
 
-class Imagen
+class Imagen extends Model
 {
-    private $pdo;
-
-    public function __construct($pdo)
-    {
-        $this->pdo = $pdo;
-    }
-
     public function getAll()
     {
-        $stmt = $this->pdo->query("SELECT * FROM Imagenes");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->get_query("SELECT * FROM Imagenes");
     }
 
     public function getById($id)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM Imagenes WHERE IdImagen = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $this->get_query("SELECT * FROM Imagenes WHERE IdImagen = ?", [$id])[0] ?? null;
     }
 
     public function create($ruta, $idTipoImagen)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO Imagenes (Ruta, IdTipoImagen) VALUES (?, ?)");
-        return $stmt->execute([$ruta, $idTipoImagen]);
+        return $this->set_query("INSERT INTO Imagenes (Ruta, IdTipoImagen) VALUES (?, ?)", [$ruta, $idTipoImagen]);
     }
 }

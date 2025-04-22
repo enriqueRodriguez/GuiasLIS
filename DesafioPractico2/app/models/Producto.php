@@ -1,38 +1,30 @@
 <?php
-require_once __DIR__ . '/../utils/database.php';
+require_once __DIR__ . '/model.php';
 
-class Producto
+class Producto extends Model
 {
-    private $pdo;
-
-    public function __construct($pdo)
-    {
-        $this->pdo = $pdo;
-    }
-
     public function getAll()
     {
-        $stmt = $this->pdo->query("SELECT * FROM Productos");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->get_query("SELECT * FROM Productos");
     }
 
     public function getById($id)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM Productos WHERE IdProducto = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $this->get_query("SELECT * FROM Productos WHERE IdProducto = ?", [$id])[0] ?? null;
     }
 
     public function create($data)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO Productos (IdProducto, Nombre, Cantidad, Precio, IdCategoria, IdImagen) VALUES (?, ?, ?, ?, ?, ?)");
-        return $stmt->execute([
-            $data['IdProducto'],
-            $data['Nombre'],
-            $data['Cantidad'],
-            $data['Precio'],
-            $data['IdCategoria'],
-            $data['IdImagen']
-        ]);
+        return $this->set_query(
+            "INSERT INTO Productos (IdProducto, Nombre, Cantidad, Precio, IdCategoria, IdImagen) VALUES (?, ?, ?, ?, ?, ?)",
+            [
+                $data['IdProducto'],
+                $data['Nombre'],
+                $data['Cantidad'],
+                $data['Precio'],
+                $data['IdCategoria'],
+                $data['IdImagen']
+            ]
+        );
     }
 }

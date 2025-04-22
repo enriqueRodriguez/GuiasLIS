@@ -6,9 +6,9 @@ class CategoriaController extends Controller
 {
     private $model;
 
-    public function __construct($pdo)
+    public function __construct()
     {
-        $this->model = new Categoria($pdo);
+        $this->model = new Categoria();
     }
 
     public function index()

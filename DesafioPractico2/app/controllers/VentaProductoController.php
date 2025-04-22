@@ -6,9 +6,9 @@ class VentaProductoController extends Controller
 {
     private $model;
 
-    public function __construct($pdo)
+    public function __construct()
     {
-        $this->model = new VentaProducto($pdo);
+        $this->model = new VentaProducto();
     }
 
     public function index()

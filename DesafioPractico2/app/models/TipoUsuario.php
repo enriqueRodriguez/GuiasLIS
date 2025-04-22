@@ -1,31 +1,23 @@
 <?php
-require_once __DIR__ . '/../utils/database.php';
+require_once __DIR__ . '/model.php';
 
-class TipoUsuario
+class TipoUsuario extends Model
 {
-    private $pdo;
-
-    public function __construct($pdo)
-    {
-        $this->pdo = $pdo;
-    }
-
     public function getAll()
     {
-        $stmt = $this->pdo->query("SELECT * FROM TipoUsuario");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->get_query("SELECT * FROM TipoUsuario");
     }
 
     public function getById($id)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM TipoUsuario WHERE IdTipoUsuario = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $this->get_query("SELECT * FROM TipoUsuario WHERE IdTipoUsuario = ?", [$id])[0] ?? null;
     }
 
     public function create($descripcion)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO TipoUsuario (Descripcion) VALUES (?)");
-        return $stmt->execute([$descripcion]);
+        return $this->set_query(
+            "INSERT INTO TipoUsuario (Descripcion) VALUES (?)",
+            [$descripcion]
+        );
     }
 }

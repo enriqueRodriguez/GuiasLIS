@@ -6,9 +6,9 @@ class VentaController extends Controller
 {
     private $model;
 
-    public function __construct($pdo)
+    public function __construct()
     {
-        $this->model = new Venta($pdo);
+        $this->model = new Venta();
     }
 
     public function index()

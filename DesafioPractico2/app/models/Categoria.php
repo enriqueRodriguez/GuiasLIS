@@ -1,31 +1,20 @@
 <?php
-require_once __DIR__ . '/../utils/database.php';
+require_once __DIR__ . '/model.php';
 
-class Categoria
+class Categoria extends Model
 {
-    private $pdo;
-
-    public function __construct($pdo)
-    {
-        $this->pdo = $pdo;
-    }
-
     public function getAll()
     {
-        $stmt = $this->pdo->query("SELECT * FROM Categorias");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->get_query("SELECT * FROM Categorias");
     }
 
     public function getById($id)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM Categorias WHERE IdCategoria = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $this->get_query("SELECT * FROM Categorias WHERE IdCategoria = ?", [$id])[0] ?? null;
     }
 
     public function create($descripcion)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO Categorias (Descripcion) VALUES (?)");
-        return $stmt->execute([$descripcion]);
+        return $this->set_query("INSERT INTO Categorias (Descripcion) VALUES (?)", [$descripcion]);
     }
 }
