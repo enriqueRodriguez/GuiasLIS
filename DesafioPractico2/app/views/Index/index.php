@@ -46,12 +46,12 @@
                         <?php if (!empty($imagenesCarrusel)): ?>
                             <?php foreach ($imagenesCarrusel as $index => $imagen): ?>
                                 <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                                    <img src="/public/<?= htmlspecialchars($imagen['Ruta']) ?>" class="d-block w-100" alt="Imagen del carrusel">
+                                    <img src="<?= htmlspecialchars($imagen['Ruta']) ?>" class="d-block w-100" alt="Imagen del carrusel">
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
                             <div class="carousel-item active">
-                                <img src="/public/images/default.png" class="d-block w-100" alt="Imagen por defecto">
+                                <img src="images/default.png" class="d-block w-100" alt="Imagen por defecto">
                             </div>
                         <?php endif; ?>
                     </div>
