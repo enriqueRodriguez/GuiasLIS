@@ -1,10 +1,6 @@
 {
-    "name": "textilexport/textilexportmvc",
-    "authors": [
-        {
-            "name": "Enrique Rodriguez",
-            "email": "enrique.rodrigz1@outlook.com"
-        }
-    ],
-    "require": {}
+    "name": "textilexport/desafio2",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
 }
