@@ -7,11 +7,22 @@ CREATE TABLE TipoUsuario (
     Descripcion VARCHAR(100) NOT NULL
 );
 
+-- Agregar valores por defecto a la tabla TipoUsuario
+INSERT INTO TipoUsuario (Descripcion) VALUES 
+('Administrador'),
+('Empleado'),
+('Cliente');
+
 -- Tabla TipoImagen
 CREATE TABLE TipoImagen (
     IdTipoImagen INT AUTO_INCREMENT PRIMARY KEY,
     Descripcion VARCHAR(100) NOT NULL
 );
+
+-- Agregar valores por defecto a la tabla TipoImagen
+INSERT INTO TipoImagen (Descripcion) VALUES 
+('Productos'),
+('Carrusel');
 
 -- Tabla Imagenes
 CREATE TABLE Imagenes (
