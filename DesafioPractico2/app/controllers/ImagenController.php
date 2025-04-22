@@ -19,12 +19,12 @@ class ImagenController extends Controller
 
     public function show($id)
     {
-        $imagen = $this->model->getById($id);
+        $imagen = $this->model->getImagenProducto($id);
         $this->render('show.php', ['imagen' => $imagen]);
     }
 
     public function store($ruta, $idTipoImagen)
     {
-        $this->model->create($ruta, $idTipoImagen);
+        $this->model->addImagen($ruta, $idTipoImagen);
     }
 }
