@@ -67,16 +67,27 @@
             <!-- Navegación de Paginación -->
             <nav aria-label="Navegación de productos" class="mt-4">
                 <ul class="pagination justify-content-center">
+                    <!-- Botón Anterior -->
                     <li class="page-item <?php echo ($paginaActual <= 1) ? 'disabled' : ''; ?>">
-                        <a class="page-link" href="/Productos/index/<?php echo $paginaActual - 1; ?>">Anterior</a>
+                        <?php if ($paginaActual <= 1): ?>
+                            <span class="page-link">Anterior</span>
+                        <?php else: ?>
+                            <a class="page-link" href="/Productos/index/<?php echo $paginaActual - 1; ?>">Anterior</a>
+                        <?php endif; ?>
                     </li>
+                    <!-- Números de Página -->
                     <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
                         <li class="page-item <?php echo ($paginaActual == $i) ? 'active' : ''; ?>">
                             <a class="page-link" href="/Productos/index/<?php echo $i; ?>"><?php echo $i; ?></a>
                         </li>
                     <?php endfor; ?>
+                    <!-- Botón Siguiente -->
                     <li class="page-item <?php echo ($paginaActual >= $totalPaginas) ? 'disabled' : ''; ?>">
-                        <a class="page-link" href="/Productos/index/<?php echo $paginaActual + 1; ?>">Siguiente</a>
+                        <?php if ($paginaActual >= $totalPaginas): ?>
+                            <span class="page-link">Siguiente</span>
+                        <?php else: ?>
+                            <a class="page-link" href="/Productos/index/<?php echo $paginaActual + 1; ?>">Siguiente</a>
+                        <?php endif; ?>
                     </li>
                 </ul>
             </nav>
