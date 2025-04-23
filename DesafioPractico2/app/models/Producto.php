@@ -87,4 +87,12 @@ class Producto extends Model
     {
         return $this->get_query("SELECT * FROM Categorias");
     }
+
+    public function restarCantidad($idProducto, $cantidad)
+    {
+        return $this->set_query(
+            "UPDATE Productos SET Cantidad = Cantidad - ? WHERE IdProducto = ?",
+            [$cantidad, $idProducto]
+        );
+    }
 }

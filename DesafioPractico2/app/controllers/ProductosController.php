@@ -126,4 +126,98 @@ class ProductosController extends Controller
         $carrito = isset($_SESSION['carrito']) && is_array($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
         $this->render('cart.php', ['carrito' => $carrito]);
     }
+
+    public function checkout()
+    {
+        session_start();
+        $carrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
+
+        // Simulación de pago (validación simple)
+        $cardNumber = $_POST['card_number'] ?? '';
+        $cardName = $_POST['card_name'] ?? '';
+        $expiryDate = $_POST['expiry_date'] ?? '';
+        $cvv = $_POST['cvv'] ?? '';
+
+        // Validación básica de campos (puedes mejorarla)
+        if (empty($carrito) || !$cardNumber || !$cardName || !$expiryDate || !$cvv) {
+            $_SESSION['mensaje_error'] = 'Datos de pago incompletos o carrito vacío.';
+            header('Location: /Productos/cart');
+            exit;
+        }
+
+        // Solo permitir a usuarios registrados y tipo cliente (comentado para pruebas)
+        /*
+        if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['TipoUsuario'] != 3) {
+            $_SESSION['mensaje_error'] = 'Debes iniciar sesión como cliente para comprar.';
+            header('Location: /Productos/cart');
+            exit;
+        }
+        $idUsuario = $_SESSION['usuario']['IdUsuario'];
+        */
+        $idUsuario = 3; // Para pruebas
+
+        // Calcular total
+        $total = 0;
+        foreach ($carrito as $item) {
+            $total += $item['precio'] * $item['cantidad'];
+        }
+
+        // Registrar venta usando el modelo
+        require_once __DIR__ . '/../models/Venta.php';
+        $ventaModel = new \Venta();
+        $ventaModel->create($idUsuario, $total);
+        $idVenta = $ventaModel->getLastInsertId();
+
+        // Registrar productos vendidos
+        require_once __DIR__ . '/../models/VentaProducto.php';
+        $ventaProductoModel = new \VentaProducto();
+        foreach ($carrito as $item) {
+            $ventaProductoModel->create([
+                'IdVenta' => $idVenta,
+                'IdProducto' => $item['id'],
+                'Cantidad' => $item['cantidad'],
+                'Precio' => $item['precio'],
+                'Total' => $item['precio'] * $item['cantidad']
+            ]);
+            // Actualizar cantidad usando el modelo Producto
+            $this->model->restarCantidad($item['id'], $item['cantidad']);
+        }
+
+        // Generar PDF de comprobante
+        require_once __DIR__ . '/../../vendor/autoload.php';
+        $pdf = new \FPDF();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 16);
+        $pdf->Cell(0, 10, mb_convert_encoding('Comprobante de Compra', 'ISO-8859-1', 'UTF-8'), 0, 1, 'C');
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(0, 10, 'ID Venta: ' . $idVenta, 0, 1);
+        $pdf->Cell(0, 10, 'Cliente (ID): ' . $idUsuario, 0, 1);
+        $pdf->Ln(5);
+
+        $pdf->Cell(60, 10, 'Producto', 1);
+        $pdf->Cell(30, 10, 'Cantidad', 1);
+        $pdf->Cell(30, 10, 'Precio', 1);
+        $pdf->Cell(30, 10, 'Subtotal', 1);
+        $pdf->Ln();
+
+        foreach ($carrito as $item) {
+            $pdf->Cell(60, 10, mb_convert_encoding($item['nombre'], 'ISO-8859-1', 'UTF-8'), 1);
+            $pdf->Cell(30, 10, $item['cantidad'], 1);
+            $pdf->Cell(30, 10, '$' . number_format($item['precio'], 2), 1);
+            $pdf->Cell(30, 10, '$' . number_format($item['precio'] * $item['cantidad'], 2), 1);
+            $pdf->Ln();
+        }
+        $pdf->Cell(120, 10, 'Total', 1);
+        $pdf->Cell(30, 10, '$' . number_format($total, 2), 1);
+        $pdf->Ln();
+
+        // Limpiar carrito
+        unset($_SESSION['carrito']);
+
+        // Descargar PDF
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="comprobante_venta_' . $idVenta . '.pdf"');
+        $pdf->Output('D', 'comprobante_venta_' . $idVenta . '.pdf');
+        exit;
+    }
 }

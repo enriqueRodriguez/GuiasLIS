@@ -20,4 +20,12 @@ class Venta extends Model
             [$idUsuario, $total]
         );
     }
+
+    public function getLastInsertId()
+    {
+        $this->open_db();
+        $lastId = $this->conn->lastInsertId();
+        $this->close_db();
+        return $lastId;
+    }
 }
