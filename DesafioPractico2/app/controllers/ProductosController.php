@@ -132,29 +132,31 @@ class ProductosController extends Controller
         session_start();
         $carrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
 
+        // Validación de usuario logueado y tipo cliente
+        if (
+            !isset($_SESSION['id_usuario']) ||
+            !isset($_SESSION['tipo_usuario']) ||
+            $_SESSION['tipo_usuario'] != 3
+        ) {
+            $_SESSION['mensaje_error'] = 'Debes iniciar sesión como cliente para comprar.';
+            header('Location: /Productos/cart');
+            exit;
+        }
+
         // Simulación de pago (validación simple)
         $cardNumber = $_POST['card_number'] ?? '';
         $cardName = $_POST['card_name'] ?? '';
         $expiryDate = $_POST['expiry_date'] ?? '';
         $cvv = $_POST['cvv'] ?? '';
 
-        // Validación básica de campos (puedes mejorarla)
         if (empty($carrito) || !$cardNumber || !$cardName || !$expiryDate || !$cvv) {
             $_SESSION['mensaje_error'] = 'Datos de pago incompletos o carrito vacío.';
             header('Location: /Productos/cart');
             exit;
         }
 
-        // Solo permitir a usuarios registrados y tipo cliente (comentado para pruebas)
-        /*
-        if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['TipoUsuario'] != 3) {
-            $_SESSION['mensaje_error'] = 'Debes iniciar sesión como cliente para comprar.';
-            header('Location: /Productos/cart');
-            exit;
-        }
-        $idUsuario = $_SESSION['usuario']['IdUsuario'];
-        */
-        $idUsuario = 3; // Para pruebas
+        $idUsuario = $_SESSION['id_usuario'];
+        $nombreCliente = $_SESSION['nombre'] . ' ' . $_SESSION['apellido'];
 
         // Calcular total
         $total = 0;
@@ -190,7 +192,7 @@ class ProductosController extends Controller
         $pdf->Cell(0, 10, mb_convert_encoding('Comprobante de Compra', 'ISO-8859-1', 'UTF-8'), 0, 1, 'C');
         $pdf->SetFont('Arial', '', 12);
         $pdf->Cell(0, 10, 'ID Venta: ' . $idVenta, 0, 1);
-        $pdf->Cell(0, 10, 'Cliente (ID): ' . $idUsuario, 0, 1);
+        $pdf->Cell(0, 10, 'Cliente: ' . mb_convert_encoding($nombreCliente, 'ISO-8859-1', 'UTF-8'), 0, 1);
         $pdf->Ln(5);
 
         // Calcular el ancho máximo necesario para la columna "Producto"
