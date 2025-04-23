@@ -5,7 +5,12 @@ class Producto extends Model
 {
     public function getAll()
     {
-        return $this->get_query("SELECT * FROM Productos");
+        return $this->get_query(
+            "SELECT p.*, i.Ruta, c.Descripcion
+             FROM Productos p
+             INNER JOIN Imagenes i ON p.IdImagen = i.IdImagen
+             INNER JOIN Categorias c ON p.IdCategoria = c.IdCategoria"
+        );
     }
 
     public function getById($id)

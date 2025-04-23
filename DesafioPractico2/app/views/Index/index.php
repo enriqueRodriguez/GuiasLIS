@@ -75,7 +75,7 @@
                         <div class="card-body">
                             <h3 class="card-title">Catálogo de Productos</h3>
                             <p class="card-text">Explora nuestra amplia gama de productos.</p>
-                            <a href="public/" class="btn btn-success btn-lg">Ver Productos</a>
+                            <a href="Productos" class="btn btn-success btn-lg">Ver Productos</a>
                         </div>
                     </div>
                 </div>

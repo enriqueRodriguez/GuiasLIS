@@ -37,7 +37,20 @@ INSERT INTO Imagenes (Ruta, IdTipoImagen) VALUES
 ('images/carrousel/textile1.jpg', 1),
 ('images/carrousel/promo1.jpg', 1),
 ('images/carrousel/textile2.jpg', 1),
-('images/carrousel/textile3.jpg', 1);
+('images/carrousel/textile3.jpg', 1),
+('images/products/taza_termica.png', 2),
+('images/products/PROD00003_1740375633.jpg', 2),
+('images/products/PROD00004_1740375690.jpg', 2),
+('images/products/PROD00005_1740375847.jpg', 2),
+('images/products/PROD00006_1740375947.jpg', 2),
+('images/products/PROD00007_1740376023.jpg', 2),
+('images/products/PROD00008_1740376107.jpg', 2),
+('images/products/PROD00009_1740376182.jpg', 2),
+('images/products/PROD00010_1740376304.jpg', 2),
+('images/products/PROD00011_1740376472.jpg', 2),
+('images/products/PROD00012_1740376541.jpg', 2),
+('images/products/PROD00013_1740376617.jpg', 2),
+('images/products/PROD00014_1740376813.jpg', 2);
 
 -- Tabla Usuarios
 CREATE TABLE Usuarios (
@@ -64,6 +77,9 @@ CREATE TABLE Categorias (
     Descripcion VARCHAR(100) NOT NULL
 );
 
+-- Agregar valores por defecto a la tabla Categorias
+INSERT INTO Categorias (Descripcion) VALUES ('Textil'), ('Promocional');
+
 -- Tabla Productos
 CREATE TABLE Productos (
     IdProducto VARCHAR(10) PRIMARY KEY,
@@ -77,6 +93,22 @@ CREATE TABLE Productos (
     FOREIGN KEY (IdCategoria) REFERENCES Categorias(IdCategoria),
     FOREIGN KEY (IdImagen) REFERENCES Imagenes(IdImagen)
 );
+
+-- Agregar valores por defecto a la tabla Productos
+INSERT INTO Productos (IdProducto, Nombre, Cantidad, Precio, IdCategoria, IdImagen) VALUES
+('PROD00002', 'Taza Térmica', 50, 12.50, 2, 5),
+('PROD00003', 'Camiseta de Algodón Unisex', 4, 12.99, 1, 6),
+('PROD00004', 'Sudadera con Capucha Premium', 2, 34.99, 1, 7),
+('PROD00005', 'Pantalón Deportivo de Poliéster', 5, 22.50, 1, 8),
+('PROD00006', 'Bufanda de Lana Hecha a Mano', 0, 18.75, 1, 9),
+('PROD00007', 'Blusa de Lino para Mujer', 3, 28.90, 1, 10),
+('PROD00008', 'Shorts de Mezclilla Clásicos', 0, 19.99, 1, 11),
+('PROD00009', 'Gorro de Invierno de Punto', 6, 14.50, 1, 12),
+('PROD00010', 'Pijama de Algodón', 1, 29.99, 1, 13),
+('PROD00011', 'Bolsas Ecológicas Reutilizables', 3, 4.99, 2, 14),
+('PROD00012', 'Toallas Deportivas con Logo', 0, 6.75, 2, 15),
+('PROD00013', 'Llaveros de Tela Personalizados', 4, 3.50, 2, 16),
+('PROD00014', 'Delantales Promocionales', 5, 10.50, 2, 17);
 
 -- Tabla Ventas
 CREATE TABLE Ventas (

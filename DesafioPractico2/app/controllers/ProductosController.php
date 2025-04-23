@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../models/Producto.php';
 require_once __DIR__ . '/Controller.php';
 
-class ProductoController extends Controller
+class ProductosController extends Controller
 {
     private $model;
 
