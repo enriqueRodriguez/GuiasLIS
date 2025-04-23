@@ -53,4 +53,52 @@ class ProductosController extends Controller
     {
         $this->model->create($data);
     }
+
+    public function addToCart()
+    {
+        session_start();
+        $idProducto = $_POST['id_producto'] ?? null;
+        $cantidad = (int)($_POST['cantidad'] ?? 1);
+
+        if (!$idProducto || $cantidad < 1) {
+            header('Location: /Productos/index');
+            exit;
+        }
+
+        // Obtener información del producto
+        $producto = $this->model->getById($idProducto);
+        if (!$producto) {
+            header('Location: /Productos/index');
+            exit;
+        }
+
+        // Inicializar el carrito si no existe o si no es un array
+        if (!isset($_SESSION['carrito']) || !is_array($_SESSION['carrito'])) {
+            $_SESSION['carrito'] = [];
+        }
+
+        // Si el producto ya está en el carrito, sumar la cantidad
+        if (isset($_SESSION['carrito'][$idProducto])) {
+            $_SESSION['carrito'][$idProducto]['cantidad'] += $cantidad;
+        } else {
+            $_SESSION['carrito'][$idProducto] = [
+                'id' => $producto['IdProducto'],
+                'nombre' => $producto['Nombre'],
+                'precio' => $producto['Precio'],
+                'cantidad' => $cantidad,
+                'ruta' => $producto['Ruta'] ?? ''
+            ];
+        }
+
+        // Redirigir de vuelta a la página de productos
+        header('Location: /Productos/index');
+        exit;
+    }
+
+    public function cart()
+    {
+        session_start();
+        $carrito = isset($_SESSION['carrito']) && is_array($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
+        $this->render('cart.php', ['carrito' => $carrito]);
+    }
 }
