@@ -13,8 +13,66 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="/">TextilExport</a>
-            <div class="ms-auto">
+            <div class="ms-auto d-flex align-items-center gap-3">
                 <a href="/" class="btn btn-outline-light">Regresar</a>
+                <?php
+                session_start();
+                $carrito = isset($_SESSION['carrito']) && is_array($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
+                $totalCarrito = 0;
+                foreach ($carrito as $item) {
+                    $totalCarrito += $item['cantidad'];
+                }
+                ?>
+                <div class="dropdown">
+                    <a href="#"
+                        class="btn btn-outline-light position-relative d-flex align-items-center justify-content-center p-0"
+                        id="cartDropdown"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        style="width: 44px; height: 44px;">
+                        <i class="bi bi-cart3" style="font-size: 1.5rem;"></i>
+                        <?php if ($totalCarrito > 0): ?>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?php echo $totalCarrito; ?>
+                            </span>
+                        <?php endif; ?>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="cartDropdown" style="min-width: 300px;">
+                        <h6 class="dropdown-header">Carrito de compras</h6>
+                        <?php if (empty($carrito)): ?>
+                            <li><span class="text-muted">El carrito está vacío.</span></li>
+                        <?php else: ?>
+                            <?php foreach ($carrito as $item): ?>
+                                <li class="mb-2">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span><?php echo htmlspecialchars($item['nombre']); ?> x<?php echo $item['cantidad']; ?></span>
+                                        <span class="text-end">$<?php echo number_format($item['precio'] * $item['cantidad'], 2); ?></span>
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <div class="d-flex justify-content-between fw-bold">
+                                    <span>Total:</span>
+                                    <span>
+                                        $<?php
+                                            $total = 0;
+                                            foreach ($carrito as $item) {
+                                                $total += $item['precio'] * $item['cantidad'];
+                                            }
+                                            echo number_format($total, 2);
+                                            ?>
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="mt-2">
+                                <a href="/Productos/cart" class="btn btn-primary w-100">Ver carrito</a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -29,7 +87,6 @@
         </div>
 
         <?php
-        session_start();
         if (!empty($_SESSION['mensaje_error'])): ?>
             <div class="container mt-3">
                 <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
