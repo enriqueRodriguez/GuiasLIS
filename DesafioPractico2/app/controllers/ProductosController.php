@@ -101,6 +101,9 @@ class ProductosController extends Controller
             ];
         }
 
+        // Agregar mensaje de éxito
+        $_SESSION['mensaje_exito'] = 'Producto agregado al carrito correctamente.';
+
         // Redirigir de vuelta a la página de productos
         header('Location: /Productos/index');
         exit;

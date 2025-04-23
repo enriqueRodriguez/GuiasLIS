@@ -107,6 +107,19 @@
             </div>
         <?php endif; ?>
 
+        <?php
+        if (!empty($_SESSION['mensaje_exito'])): ?>
+            <div class="container mt-3">
+                <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                    <?php
+                    echo $_SESSION['mensaje_exito'];
+                    unset($_SESSION['mensaje_exito']); // Eliminar el mensaje después de mostrarlo
+                    ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                </div>
+            </div>
+        <?php endif; ?>
+
         <!-- Formulario de Búsqueda -->
         <div class="container my-4">
             <form method="get" action="/Productos/index/1" class="mb-4" id="form-filtros">
