@@ -77,6 +77,17 @@ class ProductosController extends Controller
             $_SESSION['carrito'] = [];
         }
 
+        // Calcular la cantidad total que tendría el producto en el carrito
+        $cantidadEnCarrito = isset($_SESSION['carrito'][$idProducto]) ? $_SESSION['carrito'][$idProducto]['cantidad'] : 0;
+        $cantidadDisponible = (int)($producto['Cantidad'] ?? 0);
+
+        // Validar que no se agregue más de lo disponible
+        if ($cantidadEnCarrito + $cantidad > $cantidadDisponible) {
+            $_SESSION['mensaje_error'] = 'No puedes agregar más productos de los que hay en existencia.';
+            header('Location: /Productos/index');
+            exit;
+        }
+
         // Si el producto ya está en el carrito, sumar la cantidad
         if (isset($_SESSION['carrito'][$idProducto])) {
             $_SESSION['carrito'][$idProducto]['cantidad'] += $cantidad;

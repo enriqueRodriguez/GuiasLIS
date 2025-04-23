@@ -28,6 +28,20 @@
             </div>
         </div>
 
+        <?php
+        session_start();
+        if (!empty($_SESSION['mensaje_error'])): ?>
+            <div class="container mt-3">
+                <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                    <?php
+                    echo $_SESSION['mensaje_error'];
+                    unset($_SESSION['mensaje_error']);
+                    ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                </div>
+            </div>
+        <?php endif; ?>
+
         <!-- Formulario de Búsqueda -->
         <div class="container my-4">
             <form method="get" action="/Productos/index/1" class="mb-4" id="form-filtros">
