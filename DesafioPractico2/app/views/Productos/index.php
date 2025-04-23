@@ -75,6 +75,23 @@
                                         <?php echo ((int)($producto['Cantidad'] ?? 0) > 0) ? 'Disponible' : 'Agotado'; ?>
                                     </span>
                                 </div>
+                                <!-- Botón Agregar al Carrito -->
+                                <form method="post" action="/Productos/addToCart" class="d-flex align-items-center gap-2 mt-2">
+                                    <input type="number"
+                                        name="cantidad"
+                                        min="1"
+                                        max="<?php echo (int)($producto['Cantidad'] ?? 0); ?>"
+                                        value="1"
+                                        class="form-control"
+                                        style="width: 80px;"
+                                        <?php echo ((int)($producto['Cantidad'] ?? 0) <= 0) ? 'disabled' : ''; ?>>
+                                    <input type="hidden" name="id_producto" value="<?php echo htmlspecialchars($producto['IdProducto'] ?? ''); ?>">
+                                    <button type="submit"
+                                        class="btn btn-success w-100"
+                                        <?php echo ((int)($producto['Cantidad'] ?? 0) <= 0) ? 'disabled' : ''; ?>>
+                                        Agregar al carrito
+                                    </button>
+                                </form>
                                 <!-- Botón para abrir el modal -->
                                 <button class="btn btn-outline-primary mt-3 w-100"
                                     data-bs-toggle="modal"
@@ -88,6 +105,14 @@
             </div>
 
             <!-- Navegación de Paginación -->
+            <?php
+            // Construir query string para mantener filtros
+            $query = [];
+            if (!empty($buscar)) $query['buscar'] = $buscar;
+            if (!empty($categoriaSeleccionada)) $query['categoria'] = $categoriaSeleccionada;
+            $queryString = http_build_query($query);
+            $queryString = $queryString ? '&' . $queryString : '';
+            ?>
             <nav aria-label="Navegación de productos" class="mt-4">
                 <ul class="pagination justify-content-center">
                     <!-- Botón Anterior -->
@@ -95,13 +120,13 @@
                         <?php if ($paginaActual <= 1): ?>
                             <span class="page-link">Anterior</span>
                         <?php else: ?>
-                            <a class="page-link" href="/Productos/index/<?php echo $paginaActual - 1; ?>">Anterior</a>
+                            <a class="page-link" href="/Productos/index/<?php echo $paginaActual - 1; ?>?<?php echo ltrim($queryString, '&'); ?>">Anterior</a>
                         <?php endif; ?>
                     </li>
                     <!-- Números de Página -->
                     <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
                         <li class="page-item <?php echo ($paginaActual == $i) ? 'active' : ''; ?>">
-                            <a class="page-link" href="/Productos/index/<?php echo $i; ?>"><?php echo $i; ?></a>
+                            <a class="page-link" href="/Productos/index/<?php echo $i; ?>?<?php echo ltrim($queryString, '&'); ?>"><?php echo $i; ?></a>
                         </li>
                     <?php endfor; ?>
                     <!-- Botón Siguiente -->
@@ -109,7 +134,7 @@
                         <?php if ($paginaActual >= $totalPaginas): ?>
                             <span class="page-link">Siguiente</span>
                         <?php else: ?>
-                            <a class="page-link" href="/Productos/index/<?php echo $paginaActual + 1; ?>">Siguiente</a>
+                            <a class="page-link" href="/Productos/index/<?php echo $paginaActual + 1; ?>?<?php echo ltrim($queryString, '&'); ?>">Siguiente</a>
                         <?php endif; ?>
                     </li>
                 </ul>
@@ -159,6 +184,23 @@
                                         <div class="alert alert-<?php echo ((int)($producto['Cantidad'] ?? 0) > 0) ? 'success' : 'danger'; ?> mt-3">
                                             <?php echo ((int)($producto['Cantidad'] ?? 0) > 0) ? 'Producto Disponible' : 'Producto Agotado'; ?>
                                         </div>
+                                        <!-- Botón Agregar al Carrito en el Modal -->
+                                        <form method="post" action="/Productos/addToCart" class="d-flex align-items-center gap-2 mt-2">
+                                            <input type="number"
+                                                name="cantidad"
+                                                min="1"
+                                                max="<?php echo (int)($producto['Cantidad'] ?? 0); ?>"
+                                                value="1"
+                                                class="form-control"
+                                                style="width: 80px;"
+                                                <?php echo ((int)($producto['Cantidad'] ?? 0) <= 0) ? 'disabled' : ''; ?>>
+                                            <input type="hidden" name="id_producto" value="<?php echo htmlspecialchars($producto['IdProducto'] ?? ''); ?>">
+                                            <button type="submit"
+                                                class="btn btn-success w-100"
+                                                <?php echo ((int)($producto['Cantidad'] ?? 0) <= 0) ? 'disabled' : ''; ?>>
+                                                Agregar al carrito
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

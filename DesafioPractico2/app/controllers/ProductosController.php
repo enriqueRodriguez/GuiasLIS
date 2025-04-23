@@ -19,9 +19,12 @@ class ProductosController extends Controller
         $pagina = (int)$pagina > 0 ? (int)$pagina : 1;
 
         if ($buscar !== '' || $categoriaSeleccionada !== '') {
-            $productos = $this->model->buscarPorNombreYCategoria($buscar, $categoriaSeleccionada);
-            $totalPaginas = 1;
-            $pagina = 1;
+            $productosFiltrados = $this->model->buscarPorNombreYCategoria($buscar, $categoriaSeleccionada);
+            $totalProductos = count($productosFiltrados);
+            $totalPaginas = max(1, ceil($totalProductos / $productosPorPagina));
+            $pagina = min($pagina, $totalPaginas);
+            $inicio = ($pagina - 1) * $productosPorPagina;
+            $productos = array_slice($productosFiltrados, $inicio, $productosPorPagina);
         } else {
             $totalProductos = $this->model->countAll();
             $totalPaginas = max(1, ceil($totalProductos / $productosPorPagina));
