@@ -34,23 +34,23 @@ CREATE TABLE Imagenes (
 
 -- Agregar valores por defecto a la tabla Imagenes
 INSERT INTO Imagenes (Ruta, IdTipoImagen) VALUES
-('images/carrousel/textile1.jpg', 1),
-('images/carrousel/promo1.jpg', 1),
-('images/carrousel/textile2.jpg', 1),
-('images/carrousel/textile3.jpg', 1),
-('images/products/taza_termica.png', 2),
-('images/products/PROD00003_1740375633.jpg', 2),
-('images/products/PROD00004_1740375690.jpg', 2),
-('images/products/PROD00005_1740375847.jpg', 2),
-('images/products/PROD00006_1740375947.jpg', 2),
-('images/products/PROD00007_1740376023.jpg', 2),
-('images/products/PROD00008_1740376107.jpg', 2),
-('images/products/PROD00009_1740376182.jpg', 2),
-('images/products/PROD00010_1740376304.jpg', 2),
-('images/products/PROD00011_1740376472.jpg', 2),
-('images/products/PROD00012_1740376541.jpg', 2),
-('images/products/PROD00013_1740376617.jpg', 2),
-('images/products/PROD00014_1740376813.jpg', 2);
+('/images/carrousel/textile1.jpg', 1),
+('/images/carrousel/promo1.jpg', 1),
+('/images/carrousel/textile2.jpg', 1),
+('/images/carrousel/textile3.jpg', 1),
+('/images/products/taza_termica.png', 2),
+('/images/products/PROD00003_1740375633.jpg', 2),
+('/images/products/PROD00004_1740375690.jpg', 2),
+('/images/products/PROD00005_1740375847.jpg', 2),
+('/images/products/PROD00006_1740375947.jpg', 2),
+('/images/products/PROD00007_1740376023.jpg', 2),
+('/images/products/PROD00008_1740376107.jpg', 2),
+('/images/products/PROD00009_1740376182.jpg', 2),
+('/images/products/PROD00010_1740376304.jpg', 2),
+('/images/products/PROD00011_1740376472.jpg', 2),
+('/images/products/PROD00012_1740376541.jpg', 2),
+('/images/products/PROD00013_1740376617.jpg', 2),
+('/images/products/PROD00014_1740376813.jpg', 2);
 
 -- Tabla Usuarios
 CREATE TABLE Usuarios (

@@ -12,7 +12,7 @@
     <!-- Barra de Navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="#">TextilExport</a>
+            <a class="navbar-brand" href="/">TextilExport</a>
             <div class="ms-auto">
                 <a href="admin/login.php" class="btn btn-outline-light">Administrador</a>
             </div>

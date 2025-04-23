@@ -11,10 +11,23 @@ class ProductosController extends Controller
         $this->model = new Producto();
     }
 
-    public function index()
+    public function index($pagina = 1)
     {
-        $productos = $this->model->getAll();
-        $this->render('index.php', ['productos' => $productos]);
+        $productosPorPagina = 6;
+        $pagina = (int)$pagina > 0 ? (int)$pagina : 1;
+
+        $totalProductos = $this->model->countAll();
+        $totalPaginas = max(1, ceil($totalProductos / $productosPorPagina));
+        $pagina = min($pagina, $totalPaginas);
+        $inicio = ($pagina - 1) * $productosPorPagina;
+
+        $productos = $this->model->getPaged($inicio, $productosPorPagina);
+
+        $this->render('index.php', [
+            'productos' => $productos,
+            'paginaActual' => $pagina,
+            'totalPaginas' => $totalPaginas
+        ]);
     }
 
     public function show($id)

@@ -32,4 +32,23 @@ class Producto extends Model
             ]
         );
     }
+
+    public function countAll()
+    {
+        $result = $this->get_query("SELECT COUNT(*) as total FROM Productos");
+        return $result[0]['total'] ?? 0;
+    }
+
+    public function getPaged($inicio, $limite)
+    {
+        $inicio = (int)$inicio;
+        $limite = (int)$limite;
+        return $this->get_query(
+            "SELECT p.*, i.Ruta, c.Descripcion
+             FROM Productos p
+             INNER JOIN Imagenes i ON p.IdImagen = i.IdImagen
+             INNER JOIN Categorias c ON p.IdCategoria = c.IdCategoria
+             LIMIT $inicio, $limite"
+        );
+    }
 }

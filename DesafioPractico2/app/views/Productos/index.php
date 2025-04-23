@@ -1,22 +1,3 @@
-<?php
-// $productos es recibido desde el controller
-
-// Configuración de paginación
-$productosPorPagina = 6;
-$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-
-$totalProductos = count($productos);
-$totalPaginas = max(1, ceil($totalProductos / $productosPorPagina));
-
-// Asegurar que la página actual esté dentro de los límites
-$paginaActual = max(1, min($paginaActual, $totalPaginas));
-
-// Calcular el índice de inicio para la página actual
-$inicio = ($paginaActual - 1) * $productosPorPagina;
-
-// Obtener los productos para la página actual
-$productosEnPagina = array_slice($productos, $inicio, $productosPorPagina);
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -31,7 +12,7 @@ $productosEnPagina = array_slice($productos, $inicio, $productosPorPagina);
     <!-- Barra de Navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="../index.php">TextilExport</a>
+            <a class="navbar-brand" href="/">TextilExport</a>
             <div class="ms-auto">
                 <a href="/" class="btn btn-outline-light">Regresar</a>
             </div>
@@ -50,7 +31,7 @@ $productosEnPagina = array_slice($productos, $inicio, $productosPorPagina);
         <!-- Sección de Productos -->
         <div class="container my-5">
             <div class="row g-4">
-                <?php foreach ($productosEnPagina as $producto): ?>
+                <?php foreach ($productos as $producto): ?>
                     <div class="col-md-4">
                         <div class="card h-100 product-card">
                             <div class="card-image-wrapper">
@@ -87,24 +68,22 @@ $productosEnPagina = array_slice($productos, $inicio, $productosPorPagina);
             <nav aria-label="Navegación de productos" class="mt-4">
                 <ul class="pagination justify-content-center">
                     <li class="page-item <?php echo ($paginaActual <= 1) ? 'disabled' : ''; ?>">
-                        <a class="page-link" href="?pagina=<?php echo $paginaActual - 1; ?>" <?php echo ($paginaActual <= 1) ? 'tabindex="-1" aria-disabled="true"' : ''; ?>>Anterior</a>
+                        <a class="page-link" href="/Productos/index/<?php echo $paginaActual - 1; ?>">Anterior</a>
                     </li>
                     <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
                         <li class="page-item <?php echo ($paginaActual == $i) ? 'active' : ''; ?>">
-                            <a class="page-link" href="?pagina=<?php echo $i; ?>">
-                                <?php echo $i; ?>
-                            </a>
+                            <a class="page-link" href="/Productos/index/<?php echo $i; ?>"><?php echo $i; ?></a>
                         </li>
                     <?php endfor; ?>
                     <li class="page-item <?php echo ($paginaActual >= $totalPaginas) ? 'disabled' : ''; ?>">
-                        <a class="page-link" href="?pagina=<?php echo $paginaActual + 1; ?>" <?php echo ($paginaActual >= $totalPaginas) ? 'tabindex="-1" aria-disabled="true"' : ''; ?>>Siguiente</a>
+                        <a class="page-link" href="/Productos/index/<?php echo $paginaActual + 1; ?>">Siguiente</a>
                     </li>
                 </ul>
             </nav>
         </div>
 
         <!-- Ventanas Modales de Productos -->
-        <?php foreach ($productosEnPagina as $producto): ?>
+        <?php foreach ($productos as $producto): ?>
             <div class="modal fade product-modal"
                 id="productoModal<?php echo htmlspecialchars($producto['IdProducto'] ?? ''); ?>"
                 tabindex="-1"
@@ -119,7 +98,7 @@ $productosEnPagina = array_slice($productos, $inicio, $productosPorPagina);
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="product-image-container">
-                                        <img src="../<?php echo htmlspecialchars($producto['Ruta'] ?? ''); ?>"
+                                        <img src="<?php echo htmlspecialchars($producto['Ruta'] ?? ''); ?>"
                                             class="img-fluid rounded"
                                             alt="<?php echo htmlspecialchars($producto['Nombre'] ?? ''); ?>">
                                     </div>
