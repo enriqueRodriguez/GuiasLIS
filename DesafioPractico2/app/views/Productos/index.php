@@ -28,6 +28,22 @@
             </div>
         </div>
 
+        <!-- Formulario de Búsqueda -->
+        <div class="container my-4">
+            <form method="get" action="/Productos/index/1" class="mb-4" id="form-filtros">
+                <input type="text" name="buscar" id="filtro-productos" class="form-control" placeholder="Buscar producto..." value="<?php echo htmlspecialchars($buscar ?? ''); ?>">
+                <select name="categoria" id="filtro-categoria" class="form-select mt-2">
+                    <option value="">Todas las categorías</option>
+                    <?php foreach ($categorias as $cat): ?>
+                        <option value="<?php echo htmlspecialchars($cat['IdCategoria']); ?>"
+                            <?php if (($categoriaSeleccionada ?? '') == $cat['IdCategoria']) echo 'selected'; ?>>
+                            <?php echo htmlspecialchars($cat['Descripcion']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </form>
+        </div>
+
         <!-- Sección de Productos -->
         <div class="container my-5">
             <div class="row g-4">
@@ -152,5 +168,24 @@
     <!-- Pie de Página -->
     <?php include __DIR__ . "/../footer.php" ?>
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('filtro-productos');
+        const form = input.closest('form');
+        let timeout = null;
+
+        input.addEventListener('input', function() {
+            clearTimeout(timeout);
+            timeout = setTimeout(function() {
+                form.submit();
+            }, 400); // Espera 400ms después de dejar de escribir
+        });
+
+        document.getElementById('filtro-categoria').addEventListener('change', function() {
+            this.form.submit();
+        });
+    });
+</script>
 
 </html>

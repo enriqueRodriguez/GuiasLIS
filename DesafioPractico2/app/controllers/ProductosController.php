@@ -13,20 +13,30 @@ class ProductosController extends Controller
 
     public function index($pagina = 1)
     {
+        $buscar = $_GET['buscar'] ?? '';
+        $categoriaSeleccionada = $_GET['categoria'] ?? '';
         $productosPorPagina = 6;
         $pagina = (int)$pagina > 0 ? (int)$pagina : 1;
 
-        $totalProductos = $this->model->countAll();
-        $totalPaginas = max(1, ceil($totalProductos / $productosPorPagina));
-        $pagina = min($pagina, $totalPaginas);
-        $inicio = ($pagina - 1) * $productosPorPagina;
-
-        $productos = $this->model->getPaged($inicio, $productosPorPagina);
+        if ($buscar !== '' || $categoriaSeleccionada !== '') {
+            $productos = $this->model->buscarPorNombreYCategoria($buscar, $categoriaSeleccionada);
+            $totalPaginas = 1;
+            $pagina = 1;
+        } else {
+            $totalProductos = $this->model->countAll();
+            $totalPaginas = max(1, ceil($totalProductos / $productosPorPagina));
+            $pagina = min($pagina, $totalPaginas);
+            $inicio = ($pagina - 1) * $productosPorPagina;
+            $productos = $this->model->getPaged($inicio, $productosPorPagina);
+        }
 
         $this->render('index.php', [
             'productos' => $productos,
             'paginaActual' => $pagina,
-            'totalPaginas' => $totalPaginas
+            'totalPaginas' => $totalPaginas,
+            'buscar' => $buscar,
+            'categorias' => $this->model->getCategorias(),
+            'categoriaSeleccionada' => $categoriaSeleccionada
         ]);
     }
 

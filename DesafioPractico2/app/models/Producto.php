@@ -51,4 +51,40 @@ class Producto extends Model
              LIMIT $inicio, $limite"
         );
     }
+
+    public function buscarPorNombre($nombre)
+    {
+        return $this->get_query(
+            "SELECT p.*, i.Ruta, c.Descripcion
+             FROM Productos p
+             INNER JOIN Imagenes i ON p.IdImagen = i.IdImagen
+             INNER JOIN Categorias c ON p.IdCategoria = c.IdCategoria
+             WHERE p.Nombre LIKE ?",
+            ['%' . $nombre . '%']
+        );
+    }
+
+    public function buscarPorNombreYCategoria($nombre, $categoria)
+    {
+        $sql = "SELECT p.*, i.Ruta, c.Descripcion
+                FROM Productos p
+                INNER JOIN Imagenes i ON p.IdImagen = i.IdImagen
+                INNER JOIN Categorias c ON p.IdCategoria = c.IdCategoria
+                WHERE 1";
+        $params = [];
+        if ($nombre !== '') {
+            $sql .= " AND p.Nombre LIKE ?";
+            $params[] = '%' . $nombre . '%';
+        }
+        if ($categoria !== '') {
+            $sql .= " AND p.IdCategoria = ?";
+            $params[] = $categoria;
+        }
+        return $this->get_query($sql, $params);
+    }
+
+    public function getCategorias()
+    {
+        return $this->get_query("SELECT * FROM Categorias");
+    }
 }
