@@ -45,8 +45,16 @@
                             <?php foreach ($carrito as $item): ?>
                                 <li class="mb-2">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span><?php echo htmlspecialchars($item['nombre']); ?> x<?php echo $item['cantidad']; ?></span>
+                                        <span>
+                                            <?php echo htmlspecialchars($item['nombre']); ?> x<?php echo $item['cantidad']; ?>
+                                        </span>
                                         <span class="text-end">$<?php echo number_format($item['precio'] * $item['cantidad'], 2); ?></span>
+                                        <form method="post" action="/Productos/removeFromCart" style="display:inline;">
+                                            <input type="hidden" name="id_producto" value="<?php echo htmlspecialchars($item['id']); ?>">
+                                            <button type="submit" class="btn btn-sm btn-danger ms-2" title="Quitar del carrito">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </li>
                             <?php endforeach; ?>

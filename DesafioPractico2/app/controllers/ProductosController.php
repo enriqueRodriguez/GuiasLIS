@@ -106,6 +106,17 @@ class ProductosController extends Controller
         exit;
     }
 
+    public function removeFromCart()
+    {
+        session_start();
+        $idProducto = $_POST['id_producto'] ?? null;
+        if ($idProducto && isset($_SESSION['carrito'][$idProducto])) {
+            unset($_SESSION['carrito'][$idProducto]);
+        }
+        header('Location: /Productos/index');
+        exit;
+    }
+
     public function cart()
     {
         session_start();
