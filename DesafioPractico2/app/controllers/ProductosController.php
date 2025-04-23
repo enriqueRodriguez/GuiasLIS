@@ -162,11 +162,10 @@ class ProductosController extends Controller
             $total += $item['precio'] * $item['cantidad'];
         }
 
-        // Registrar venta usando el modelo
+        // Registrar venta usando el modelo y obtener el ID de la venta
         require_once __DIR__ . '/../models/Venta.php';
         $ventaModel = new \Venta();
-        $ventaModel->create($idUsuario, $total);
-        $idVenta = $ventaModel->getLastInsertId();
+        $idVenta = $ventaModel->create($idUsuario, $total);
 
         // Registrar productos vendidos
         require_once __DIR__ . '/../models/VentaProducto.php';
@@ -194,20 +193,31 @@ class ProductosController extends Controller
         $pdf->Cell(0, 10, 'Cliente (ID): ' . $idUsuario, 0, 1);
         $pdf->Ln(5);
 
-        $pdf->Cell(60, 10, 'Producto', 1);
+        // Calcular el ancho máximo necesario para la columna "Producto"
+        $maxWidth = 90; // ancho mínimo
+        foreach ($carrito as $item) {
+            $width = $pdf->GetStringWidth(mb_convert_encoding($item['nombre'], 'ISO-8859-1', 'UTF-8')) + 10; // margen extra
+            if ($width > $maxWidth) {
+                $maxWidth = $width;
+            }
+        }
+
+        // Encabezados
+        $pdf->Cell($maxWidth, 10, 'Producto', 1);
         $pdf->Cell(30, 10, 'Cantidad', 1);
         $pdf->Cell(30, 10, 'Precio', 1);
         $pdf->Cell(30, 10, 'Subtotal', 1);
         $pdf->Ln();
 
+        // Filas
         foreach ($carrito as $item) {
-            $pdf->Cell(60, 10, mb_convert_encoding($item['nombre'], 'ISO-8859-1', 'UTF-8'), 1);
+            $pdf->Cell($maxWidth, 10, mb_convert_encoding($item['nombre'], 'ISO-8859-1', 'UTF-8'), 1);
             $pdf->Cell(30, 10, $item['cantidad'], 1);
             $pdf->Cell(30, 10, '$' . number_format($item['precio'], 2), 1);
             $pdf->Cell(30, 10, '$' . number_format($item['precio'] * $item['cantidad'], 2), 1);
             $pdf->Ln();
         }
-        $pdf->Cell(120, 10, 'Total', 1);
+        $pdf->Cell($maxWidth + 60, 10, 'Total', 1);
         $pdf->Cell(30, 10, '$' . number_format($total, 2), 1);
         $pdf->Ln();
 

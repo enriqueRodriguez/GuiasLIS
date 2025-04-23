@@ -15,15 +15,9 @@ class Venta extends Model
 
     public function create($idUsuario, $total)
     {
-        return $this->set_query(
-            "INSERT INTO Ventas (IdUsuario, Total) VALUES (?, ?)",
-            [$idUsuario, $total]
-        );
-    }
-
-    public function getLastInsertId()
-    {
         $this->open_db();
+        $stm = $this->conn->prepare("INSERT INTO Ventas (IdUsuario, Total) VALUES (?, ?)");
+        $stm->execute([$idUsuario, $total]);
         $lastId = $this->conn->lastInsertId();
         $this->close_db();
         return $lastId;
