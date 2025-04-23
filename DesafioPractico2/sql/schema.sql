@@ -21,8 +21,8 @@ CREATE TABLE TipoImagen (
 
 -- Agregar valores por defecto a la tabla TipoImagen
 INSERT INTO TipoImagen (Descripcion) VALUES 
-('Productos'),
-('Carrusel');
+('Carrusel'),
+('Productos');
 
 -- Tabla Imagenes
 CREATE TABLE Imagenes (
@@ -31,6 +31,13 @@ CREATE TABLE Imagenes (
     IdTipoImagen INT NOT NULL,
     FOREIGN KEY (IdTipoImagen) REFERENCES TipoImagen(IdTipoImagen)
 );
+
+-- Agregar valores por defecto a la tabla Imagenes
+INSERT INTO Imagenes (Ruta, IdTipoImagen) VALUES
+('images/carrousel/textile1.jpg', 1),
+('images/carrousel/promo1.jpg', 1),
+('images/carrousel/textile2.jpg', 1),
+('images/carrousel/textile3.jpg', 1);
 
 -- Tabla Usuarios
 CREATE TABLE Usuarios (
@@ -44,6 +51,12 @@ CREATE TABLE Usuarios (
     FOREIGN KEY (TipoUsuario) REFERENCES TipoUsuario(IdTipoUsuario),
     FOREIGN KEY (IdImagen) REFERENCES Imagenes(IdImagen)
 );
+
+-- Agregar valores por defecto a la tabla Usuarios
+INSERT INTO Usuarios (Username, Password, Nombre, Apellido, TipoUsuario, IdImagen) VALUES
+('admin', '1234', 'admin', 'adminA', 1, NULL),      -- Administrador
+('empleado', '1234', 'empleado', 'empleadoA', 2, NULL), -- Empleado
+('cliente', '1234', 'cliente', 'clienteA', 3, NULL); -- Cliente
 
 -- Tabla Categorias
 CREATE TABLE Categorias (
