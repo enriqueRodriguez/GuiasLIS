@@ -224,10 +224,16 @@ class ProductosController extends Controller
         // Limpiar carrito
         unset($_SESSION['carrito']);
 
-        // Descargar PDF
-        header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename="comprobante_venta_' . $idVenta . '.pdf"');
-        $pdf->Output('D', 'comprobante_venta_' . $idVenta . '.pdf');
+        // Guardar PDF en una carpeta temporal
+        $nombreArchivo = 'comprobante_venta_' . $idVenta . '.pdf';
+        $rutaArchivo = sys_get_temp_dir() . '/' . $nombreArchivo;
+        $pdf->Output('F', $rutaArchivo);
+
+        // Guardar la ruta en sesión
+        $_SESSION['comprobante_pdf'] = $rutaArchivo;
+
+        // Redirigir a /Productos
+        header('Location: /Productos');
         exit;
     }
 }

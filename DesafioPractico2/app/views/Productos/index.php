@@ -120,6 +120,16 @@
             </div>
         <?php endif; ?>
 
+        <?php if (isset($_SESSION['comprobante_pdf'])): ?>
+            <div class="container mt-3">
+                <div class="alert alert-success">
+                    Compra realizada con éxito.
+                    <a href="/descargar_comprobante.php?archivo=<?php echo urlencode(basename($_SESSION['comprobante_pdf'])); ?>">Descargar comprobante</a>
+                </div>
+                <?php unset($_SESSION['comprobante_pdf']); ?>
+            </div>
+        <?php endif; ?>
+
         <!-- Formulario de Búsqueda -->
         <div class="container my-4">
             <form method="get" action="/Productos/index/1" class="mb-4" id="form-filtros">
