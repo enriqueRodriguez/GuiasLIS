@@ -13,6 +13,11 @@ class Usuario extends Model
         return $this->get_query("SELECT * FROM Usuarios WHERE IdUsuario = ?", [$id])[0] ?? null;
     }
 
+    public function getUser($user, $pass)
+    {
+        return $this->get_query("SELECT * FROM Usuarios WHERE Username = ? AND Password = ?", [$user, $pass])[0] ?? null;
+    }
+
     public function create($data)
     {
         return $this->set_query(

@@ -9,15 +9,61 @@
 </head>
 
 <body class="home-page">
+    <?php
+    session_start();
+    $tipoUsuario = $_SESSION['tipo_usuario'] ?? null;
+    ?>
     <!-- Barra de Navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="/">TextilExport</a>
-            <div class="ms-auto">
-                <a href="admin/login.php" class="btn btn-outline-light">Administrador</a>
+            <div class="ms-auto d-flex gap-2 align-items-center">
+                <?php if ($tipoUsuario): ?>
+                    <span class="text-white fw-bold">
+                        <?php echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']); ?>
+                    </span>
+                    <?php if ($tipoUsuario === 1 || $tipoUsuario === 2): ?>
+                        <a href="admin/login.php" class="btn btn-outline-light">Administrador</a>
+                    <?php endif; ?>
+                    <form action="/Usuario/logout" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
+                    </form>
+                <?php else: ?>
+                    <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
+                <?php endif; ?>
             </div>
         </div>
     </nav>
+
+    <!-- Modal de Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/Usuario/login" method="post" autocomplete="off">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Iniciar Sesión</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Usuario</label>
+                            <input type="text" class="form-control" name="username" id="username" required autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" name="password" id="password" required>
+                        </div>
+                        <?php if (!empty($error)): ?>
+                            <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <main>
         <!-- Sección Principal -->
@@ -85,6 +131,31 @@
 
     <!-- Pie de Página -->
     <?php include __DIR__ . "/../footer.php" ?>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(loginForm);
+                    fetch('/Usuario/login', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                location.reload();
+                            } else {
+                                document.getElementById('loginError').textContent = data.error || 'Error de autenticación';
+                                document.getElementById('loginError').classList.remove('d-none');
+                            }
+                        });
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
