@@ -31,7 +31,11 @@
         <!-- Formulario de Búsqueda -->
         <div class="container my-4">
             <form method="get" action="/Productos/index/1" class="mb-4" id="form-filtros">
-                <input type="text" name="buscar" id="filtro-productos" class="form-control" placeholder="Buscar producto..." value="<?php echo htmlspecialchars($buscar ?? ''); ?>">
+                <div class="input-group">
+                    <input type="text" name="buscar" id="filtro-productos" class="form-control" placeholder="Buscar producto..." value="<?php echo htmlspecialchars($buscar ?? ''); ?>">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <button type="button" class="btn btn-outline-secondary" id="btn-limpiar-busqueda">Limpiar</button>
+                </div>
                 <select name="categoria" id="filtro-categoria" class="form-select mt-2">
                     <option value="">Todas las categorías</option>
                     <?php foreach ($categorias as $cat): ?>
