@@ -46,6 +46,9 @@
 
         <!-- Sección de Productos -->
         <div class="container my-5">
+            <?php if (empty($productos)): ?>
+                <div class="alert alert-warning text-center">No hay productos para mostrar.</div>
+            <?php endif; ?>
             <div class="row g-4">
                 <?php foreach ($productos as $producto): ?>
                     <div class="col-md-4">
