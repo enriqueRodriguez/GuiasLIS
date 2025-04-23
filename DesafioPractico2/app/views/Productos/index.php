@@ -71,6 +71,7 @@ $productosEnPagina = array_slice($productos, $inicio, $productosPorPagina);
                                         <?php echo ((int)($producto['Cantidad'] ?? 0) > 0) ? 'Disponible' : 'Agotado'; ?>
                                     </span>
                                 </div>
+                                <!-- Botón para abrir el modal -->
                                 <button class="btn btn-outline-primary mt-3 w-100"
                                     data-bs-toggle="modal"
                                     data-bs-target="#productoModal<?php echo htmlspecialchars($producto['IdProducto'] ?? ''); ?>">
@@ -105,7 +106,7 @@ $productosEnPagina = array_slice($productos, $inicio, $productosPorPagina);
         <!-- Ventanas Modales de Productos -->
         <?php foreach ($productosEnPagina as $producto): ?>
             <div class="modal fade product-modal"
-                id="productoModal<?php echo htmlspecialchars($producto['Ruta'] ?? ''); ?>"
+                id="productoModal<?php echo htmlspecialchars($producto['IdProducto'] ?? ''); ?>"
                 tabindex="-1"
                 aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -118,7 +119,7 @@ $productosEnPagina = array_slice($productos, $inicio, $productosPorPagina);
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="product-image-container">
-                                        <img src="../<?php echo htmlspecialchars($producto['IdImagen'] ?? ''); ?>"
+                                        <img src="../<?php echo htmlspecialchars($producto['Ruta'] ?? ''); ?>"
                                             class="img-fluid rounded"
                                             alt="<?php echo htmlspecialchars($producto['Nombre'] ?? ''); ?>">
                                     </div>
