@@ -17,6 +17,13 @@
     foreach ($carrito as $item) {
         $totalCarrito += $item['cantidad'];
     }
+
+    $ventaReciente = null;
+    if (isset($_SESSION['venta_reciente_id'])) {
+        require_once __DIR__ . '/../../models/Venta.php';
+        $ventaModel = new Venta();
+        $ventaReciente = $ventaModel->getById($_SESSION['venta_reciente_id']);
+    }
     ?>
     <!-- Barra de Navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -124,13 +131,13 @@
             </div>
         <?php endif; ?>
 
-        <?php if (isset($_SESSION['comprobante_pdf'])): ?>
+        <?php if ($ventaReciente && !empty($ventaReciente['RutaComprobante'])): ?>
             <div class="container mt-3">
                 <div class="alert alert-success">
                     Compra realizada con éxito.
-                    <a href="/descargar_comprobante.php?archivo=<?php echo urlencode(basename($_SESSION['comprobante_pdf'])); ?>">Descargar comprobante</a>
+                    <a href="<?= htmlspecialchars($ventaReciente['RutaComprobante']) ?>" target="_blank">Descargar comprobante</a>
                 </div>
-                <?php unset($_SESSION['comprobante_pdf']); ?>
+                <?php unset($_SESSION['venta_reciente_id']); ?>
             </div>
         <?php endif; ?>
 

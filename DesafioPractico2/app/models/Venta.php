@@ -22,4 +22,12 @@ class Venta extends Model
         $this->close_db();
         return $lastId;
     }
+
+    public function updateRutaComprobante($idVenta, $ruta)
+    {
+        $this->open_db();
+        $stm = $this->conn->prepare("UPDATE Ventas SET RutaComprobante = ? WHERE IdVenta = ?");
+        $stm->execute([$ruta, $idVenta]);
+        $this->close_db();
+    }
 }

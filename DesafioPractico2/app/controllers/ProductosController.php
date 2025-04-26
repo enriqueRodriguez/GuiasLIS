@@ -223,16 +223,23 @@ class ProductosController extends Controller
         $pdf->Cell(30, 10, '$' . number_format($total, 2), 1);
         $pdf->Ln();
 
-        // Limpiar carrito
-        unset($_SESSION['carrito']);
-
-        // Guardar PDF en una carpeta temporal
+        // Guardar PDF en carpeta permanente
         $nombreArchivo = 'comprobante_venta_' . $idVenta . '.pdf';
-        $rutaArchivo = sys_get_temp_dir() . '/' . $nombreArchivo;
+        $rutaCarpeta = __DIR__ . '/../../public/comprobantes/';
+        if (!is_dir($rutaCarpeta)) {
+            mkdir($rutaCarpeta, 0777, true);
+        }
+        $rutaArchivo = $rutaCarpeta . $nombreArchivo;
         $pdf->Output('F', $rutaArchivo);
 
-        // Guardar la ruta en sesión
-        $_SESSION['comprobante_pdf'] = $rutaArchivo;
+        // Actualizar la venta con la ruta del comprobante
+        $ventaModel->updateRutaComprobante($idVenta, '/comprobantes/' . $nombreArchivo);
+
+        // Guardar el ID de la venta en sesión
+        $_SESSION['venta_reciente_id'] = $idVenta;
+
+        // Limpiar carrito
+        unset($_SESSION['carrito']);
 
         // Redirigir a /Productos
         header('Location: /Productos');

@@ -116,6 +116,7 @@ CREATE TABLE Ventas (
     IdUsuario INT NOT NULL,
     Total DECIMAL(10, 2) NOT NULL CHECK (Total >= 0),
     FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    RutaComprobante VARCHAR(255) NULL,
     FOREIGN KEY (IdUsuario) REFERENCES Usuarios(IdUsuario)
 );
 
