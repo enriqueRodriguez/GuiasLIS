@@ -34,23 +34,18 @@
                     <span class="text-white fw-bold me-2">
                         <?php echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']); ?>
                     </span>
-                    <form action="/Usuario/logout" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
-                    </form>
-                <?php else: ?>
-                    <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
                 <?php endif; ?>
-                <a href="/" class="btn btn-outline-light">Regresar</a>
+
                 <?php if ($tipoUsuario === 3): ?>
                     <!-- Carrito solo para clientes logueados -->
                     <div class="dropdown">
                         <a href="#"
-                            class="btn btn-outline-light position-relative d-flex align-items-center justify-content-center p-0"
+                            class="btn btn-outline-light position-relative d-flex align-items-center justify-content-center"
                             id="cartDropdown"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
-                            style="width: 44px; height: 44px;">
-                            <i class="bi bi-cart3" style="font-size: 1.5rem;"></i>
+                            style="height: 38px; width: 38px; padding: 0;">
+                            <i class="bi bi-cart3" style="font-size: 1.3rem;"></i>
                             <?php if ($totalCarrito > 0): ?>
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                     <?php echo $totalCarrito; ?>
@@ -101,6 +96,16 @@
                             <?php endif; ?>
                         </ul>
                     </div>
+                <?php endif; ?>
+
+                <a href="/" class="btn btn-outline-light">Regresar</a>
+
+                <?php if ($tipoUsuario): ?>
+                    <form action="/Usuario/logout" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
+                    </form>
+                <?php else: ?>
+                    <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
                 <?php endif; ?>
             </div>
         </div>
