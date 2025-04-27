@@ -39,7 +39,7 @@
     <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="/Usuario/login" method="post" autocomplete="off">
+                <form id="loginForm" action="/Usuario/login" method="post" autocomplete="off">
                     <div class="modal-header">
                         <h5 class="modal-title">Iniciar Sesión</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
@@ -53,9 +53,7 @@
                             <label for="password" class="form-label">Contraseña</label>
                             <input type="password" class="form-control" name="password" id="password" required>
                         </div>
-                        <?php if (!empty($error)): ?>
-                            <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-                        <?php endif; ?>
+                        <div id="loginError" class="alert alert-danger d-none"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary w-100">Ingresar</button>
@@ -131,31 +129,6 @@
 
     <!-- Pie de Página -->
     <?php include __DIR__ . "/../footer.php" ?>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginForm = document.getElementById('loginForm');
-            if (loginForm) {
-                loginForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const formData = new FormData(loginForm);
-                    fetch('/Usuario/login', {
-                            method: 'POST',
-                            body: formData
-                        })
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.success) {
-                                location.reload();
-                            } else {
-                                document.getElementById('loginError').textContent = data.error || 'Error de autenticación';
-                                document.getElementById('loginError').classList.remove('d-none');
-                            }
-                        });
-                });
-            }
-        });
-    </script>
 </body>
 
 </html>

@@ -45,11 +45,26 @@ class UsuarioController extends Controller
                 $_SESSION['apellido'] = $usuario['Apellido'];
                 $_SESSION['tipo_usuario'] = (int)$usuario['TipoUsuario'];
                 $_SESSION['id_imagen'] = $usuario['IdImagen'];
+
+                // Si es AJAX, responde con JSON
+                if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+                    header('Content-Type: application/json');
+                    echo json_encode(['success' => true]);
+                    exit;
+                }
+
                 header('Location: /');
                 exit;
             } else {
-                // Puedes pasar el error a la vista si lo deseas
                 $error = 'Usuario o contraseña incorrectos';
+
+                // Si es AJAX, responde con JSON
+                if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+                    header('Content-Type: application/json');
+                    echo json_encode(['success' => false, 'error' => $error]);
+                    exit;
+                }
+
                 $this->render('Index/index.php', ['error' => $error]);
                 exit;
             }

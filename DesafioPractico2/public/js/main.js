@@ -39,4 +39,41 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+
+    // Manejo de login por AJAX
+    const loginForm = document.getElementById('loginForm');
+    const loginError = document.getElementById('loginError');
+    const loginModal = document.getElementById('loginModal');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(loginForm);
+
+            fetch('/Usuario/login', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Cierra el modal y recarga la página
+                        const modal = bootstrap.Modal.getInstance(loginModal) || new bootstrap.Modal(loginModal);
+                        modal.hide();
+                        window.location.reload();
+                    } else {
+                        // Muestra el error
+                        loginError.textContent = data.error || 'Error desconocido';
+                        loginError.classList.remove('d-none');
+                    }
+                })
+                .catch(() => {
+                    loginError.textContent = 'Error de conexión';
+                    loginError.classList.remove('d-none');
+                });
+        });
+    }
 });
