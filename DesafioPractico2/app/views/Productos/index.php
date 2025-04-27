@@ -147,12 +147,18 @@
         <?php endif; ?>
 
         <?php if ($ventaReciente && !empty($ventaReciente['RutaComprobante'])): ?>
-            <div class="container mt-3">
-                <div class="alert alert-success">
+            <div class="container mt-3" id="comprobante-alert-container">
+                <div class="alert alert-success alert-dismissible fade show" role="alert" id="comprobante-alert">
                     Compra realizada con éxito.
-                    <a href="<?= htmlspecialchars($ventaReciente['RutaComprobante']) ?>" target="_blank">Descargar comprobante</a>
+                    <a href="<?= htmlspecialchars($ventaReciente['RutaComprobante']) ?>"
+                        target="_blank"
+                        id="descargar-comprobante-link"
+                        onclick="document.getElementById('comprobante-alert-container').remove(); fetch('/Productos/clearComprobante', {method: 'POST'});">
+                        Descargar comprobante
+                    </a>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"
+                        onclick="document.getElementById('comprobante-alert-container').remove(); fetch('/Productos/clearComprobante', {method: 'POST'});"></button>
                 </div>
-                <?php unset($_SESSION['venta_reciente_id']); ?>
             </div>
         <?php endif; ?>
 

@@ -245,4 +245,12 @@ class ProductosController extends Controller
         header('Location: /Productos');
         exit;
     }
+
+    public function clearComprobante()
+    {
+        session_start();
+        unset($_SESSION['venta_reciente_id']);
+        http_response_code(204);
+        exit;
+    }
 }
