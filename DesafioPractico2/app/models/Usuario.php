@@ -15,7 +15,10 @@ class Usuario extends Model
 
     public function getUser($user, $pass)
     {
-        return $this->get_query("SELECT * FROM Usuarios WHERE Username = ? AND Password = ?", [$user, $pass])[0] ?? null;
+        return $this->get_query(
+            "SELECT * FROM Usuarios WHERE Username = ? AND Password = ? AND Activo = 1",
+            [$user, $pass]
+        )[0] ?? null;
     }
 
     public function create($data)

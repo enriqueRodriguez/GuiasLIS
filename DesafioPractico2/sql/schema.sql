@@ -61,15 +61,16 @@ CREATE TABLE Usuarios (
     Apellido VARCHAR(100) NOT NULL,
     TipoUsuario INT NOT NULL,
     IdImagen INT,
+    Activo TINYINT(1) NOT NULL DEFAULT 1, -- Nuevo campo
     FOREIGN KEY (TipoUsuario) REFERENCES TipoUsuario(IdTipoUsuario),
     FOREIGN KEY (IdImagen) REFERENCES Imagenes(IdImagen)
 );
 
 -- Agregar valores por defecto a la tabla Usuarios
-INSERT INTO Usuarios (Username, Password, Nombre, Apellido, TipoUsuario, IdImagen) VALUES
-('admin', '1234', 'admin', 'adminA', 1, NULL),      -- Administrador
-('empleado', '1234', 'empleado', 'empleadoA', 2, NULL), -- Empleado
-('cliente', '1234', 'cliente', 'clienteA', 3, NULL); -- Cliente
+INSERT INTO Usuarios (Username, Password, Nombre, Apellido, TipoUsuario, IdImagen, Activo) VALUES
+('admin', '1234', 'admin', 'adminA', 1, NULL, 1),      -- Administrador
+('empleado', '1234', 'empleado', 'empleadoA', 2, NULL, 1), -- Empleado
+('cliente', '1234', 'cliente', 'clienteA', 3, NULL, 1); -- Cliente
 
 -- Tabla Categorias
 CREATE TABLE Categorias (
