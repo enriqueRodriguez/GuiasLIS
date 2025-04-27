@@ -101,7 +101,7 @@
                 <a href="/" class="btn btn-outline-light">Regresar</a>
 
                 <?php if ($tipoUsuario): ?>
-                    <form action="/Usuario/logout" method="post" class="d-inline">
+                    <form id="logoutForm" action="/Usuario/logout" method="post" class="d-inline">
                         <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
                     </form>
                 <?php else: ?>

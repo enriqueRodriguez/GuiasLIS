@@ -76,4 +76,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     }
+
+    // Manejo de logout por AJAX
+    const logoutForm = document.getElementById('logoutForm');
+    if (logoutForm) {
+        logoutForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            fetch('/Usuario/logout', {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.reload(); // Recarga la misma vista
+                    }
+                });
+        });
+    }
 });

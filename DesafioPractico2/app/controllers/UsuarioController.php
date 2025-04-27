@@ -76,6 +76,14 @@ class UsuarioController extends Controller
         session_start();
         session_unset();
         session_destroy();
+
+        // Si es AJAX, responde con JSON y no redirige
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => true]);
+            exit;
+        }
+
         header('Location: /');
         exit;
     }
