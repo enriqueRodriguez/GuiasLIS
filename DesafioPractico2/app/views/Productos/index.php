@@ -30,6 +30,16 @@
         <div class="container">
             <a class="navbar-brand" href="/">TextilExport</a>
             <div class="ms-auto d-flex align-items-center gap-3">
+                <?php if ($tipoUsuario): ?>
+                    <span class="text-white fw-bold me-2">
+                        <?php echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']); ?>
+                    </span>
+                    <form action="/Usuario/logout" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
+                    </form>
+                <?php else: ?>
+                    <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">Iniciar Sesión</button>
+                <?php endif; ?>
                 <a href="/" class="btn btn-outline-light">Regresar</a>
                 <?php if ($tipoUsuario === 3): ?>
                     <!-- Carrito solo para clientes logueados -->
@@ -328,6 +338,34 @@
             </div>
         <?php endforeach; ?>
     </main>
+
+    <!-- Modal de Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="loginForm" action="/Usuario/login" method="post" autocomplete="off">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Iniciar Sesión</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Usuario</label>
+                            <input type="text" class="form-control" name="username" id="username" required autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" name="password" id="password" required>
+                        </div>
+                        <div id="loginError" class="alert alert-danger d-none"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Pie de Página -->
     <?php include __DIR__ . "/../footer.php" ?>
