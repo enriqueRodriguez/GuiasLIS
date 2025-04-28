@@ -5,7 +5,11 @@ class Venta extends Model
 {
     public function getAll()
     {
-        return $this->get_query("SELECT * FROM Ventas");
+        return $this->get_query("
+            SELECT v.*, u.Nombre, u.Apellido
+            FROM Ventas v
+            JOIN Usuarios u ON v.IdUsuario = u.IdUsuario
+        ");
     }
 
     public function getById($id)

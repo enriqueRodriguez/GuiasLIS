@@ -20,10 +20,10 @@ $tipoUsuario = $_SESSION['tipo_usuario'] ?? null;
                     <span class="text-white fw-bold">
                         <?= htmlspecialchars(($_SESSION['nombre'] ?? '') . ' ' . ($_SESSION['apellido'] ?? '')) ?>
                     </span>
-                    <a href="/Ventas/index" class="btn btn-outline-light">Ventas</a>
+                    <a href="/Venta/" class="btn btn-outline-light">Ventas</a>
                     <?php if ($tipoUsuario == 1): ?>
-                        <a href="/Usuarios/index" class="btn btn-outline-light">Usuarios</a>
-                        <a href="/Clientes/index" class="btn btn-outline-light">Clientes</a>
+                        <a href="/Usuarios/" class="btn btn-outline-light">Usuarios</a>
+                        <a href="/Clientes/" class="btn btn-outline-light">Clientes</a>
                     <?php endif; ?>
                     <a href="/Usuario/logout" class="btn btn-outline-light">Cerrar Sesión</a>
                 <?php endif; ?>
