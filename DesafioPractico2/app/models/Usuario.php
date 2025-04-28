@@ -15,10 +15,15 @@ class Usuario extends Model
 
     public function getUser($user, $pass)
     {
-        return $this->get_query(
-            "SELECT * FROM Usuarios WHERE Username = ? AND Password = ? AND Activo = 1",
-            [$user, $pass]
+        $usuario = $this->get_query(
+            "SELECT * FROM Usuarios WHERE Username = ? AND Activo = 1",
+            [$user]
         )[0] ?? null;
+
+        if ($usuario && password_verify($pass, $usuario['Password'])) {
+            return $usuario;
+        }
+        return null;
     }
 
     public function getByUsername($username)
@@ -28,11 +33,12 @@ class Usuario extends Model
 
     public function create($data)
     {
+        $hashedPassword = password_hash($data['Password'], PASSWORD_DEFAULT);
         return $this->set_query(
             "INSERT INTO Usuarios (Username, Password, Nombre, Apellido, TipoUsuario, IdImagen) VALUES (?, ?, ?, ?, ?, ?)",
             [
                 $data['Username'],
-                $data['Password'],
+                $hashedPassword,
                 $data['Nombre'],
                 $data['Apellido'],
                 $data['TipoUsuario'],
@@ -63,7 +69,7 @@ class Usuario extends Model
         }
         if (!empty($data['Password'])) {
             $campos[] = "Password = ?";
-            $params[] = $data['Password'];
+            $params[] = password_hash($data['Password'], PASSWORD_DEFAULT);
         }
         $params[] = $id;
         $sql = "UPDATE Usuarios SET " . implode(', ', $campos) . " WHERE IdUsuario = ?";

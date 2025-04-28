@@ -68,9 +68,9 @@ CREATE TABLE Usuarios (
 
 -- Agregar valores por defecto a la tabla Usuarios
 INSERT INTO Usuarios (Username, Password, Nombre, Apellido, TipoUsuario, IdImagen, Activo) VALUES
-('admin', '1234', 'admin', 'adminA', 1, NULL, 1),      -- Administrador
-('empleado', '1234', 'empleado', 'empleadoA', 2, NULL, 1), -- Empleado
-('cliente', '1234', 'cliente', 'clienteA', 3, NULL, 1); -- Cliente
+('admin', '$2y$12$MJ26yi548Iayx80kUQsMe.yTiZxgCK4sxGsxbkA.hxaaz5kGjNMhu', 'admin', 'adminA', 1, NULL, 1),      -- Administrador
+('empleado', '$2y$12$BI7d5pLwhNcavSQQ3w2FBeamUTFN9AMYuJ4.DIrL0TfrjEJ6OA.qC', 'empleado', 'empleadoA', 2, NULL, 1), -- Empleado
+('cliente', '$2y$12$noa22hAlndyopWX1zIAr/.J1.jfExENTr0OlnWkqrQTjCsvXMwsS.', 'cliente', 'clienteA', 3, NULL, 1); -- Cliente
 
 -- Tabla Categorias
 CREATE TABLE Categorias (
