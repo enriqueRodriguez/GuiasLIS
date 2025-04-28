@@ -20,7 +20,12 @@ class Imagen extends Model
 
     public function addImagen($ruta, $idTipoImagen)
     {
-        return $this->set_query("INSERT INTO Imagenes (Ruta, IdTipoImagen) VALUES (?, ?)", [$ruta, $idTipoImagen]);
+        $this->open_db();
+        $stmt = $this->conn->prepare("INSERT INTO Imagenes (Ruta, IdTipoImagen) VALUES (?, ?)");
+        $stmt->execute([$ruta, $idTipoImagen]);
+        $lastId = $this->conn->lastInsertId();
+        $this->close_db();
+        return $lastId;
     }
 
     public function updateImagen($ruta, $id)

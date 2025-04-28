@@ -95,4 +95,35 @@ class Producto extends Model
             [$cantidad, $idProducto]
         );
     }
+
+    public function generarNuevoId()
+    {
+        $result = $this->get_query("SELECT IdProducto FROM Productos ORDER BY IdProducto DESC LIMIT 1");
+        if (!empty($result)) {
+            $last = $result[0]['IdProducto'];
+            $num = intval(substr($last, 4)) + 1;
+            return 'PROD' . str_pad($num, 5, '0', STR_PAD_LEFT);
+        }
+        return 'PROD00001';
+    }
+
+    public function update($data)
+    {
+        return $this->set_query(
+            "UPDATE Productos SET Nombre=?, Cantidad=?, Precio=?, IdCategoria=?, IdImagen=? WHERE IdProducto=?",
+            [
+                $data['Nombre'],
+                $data['Cantidad'],
+                $data['Precio'],
+                $data['IdCategoria'],
+                $data['IdImagen'],
+                $data['IdProducto']
+            ]
+        );
+    }
+
+    public function delete($id)
+    {
+        return $this->set_query("DELETE FROM Productos WHERE IdProducto=?", [$id]);
+    }
 }

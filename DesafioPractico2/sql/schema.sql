@@ -38,7 +38,7 @@ INSERT INTO Imagenes (Ruta, IdTipoImagen) VALUES
 ('/images/carrousel/promo1.jpg', 1),
 ('/images/carrousel/textile2.jpg', 1),
 ('/images/carrousel/textile3.jpg', 1),
-('/images/products/taza_termica.png', 2),
+('/images/products/PROD00002_1745802639.png', 2),
 ('/images/products/PROD00003_1740375633.jpg', 2),
 ('/images/products/PROD00004_1740375690.jpg', 2),
 ('/images/products/PROD00005_1740375847.jpg', 2),
