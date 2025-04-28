@@ -22,17 +22,6 @@ session_start();
     <main class="container my-5">
         <h1 class="mb-4">Gestión de Productos</h1>
 
-        <!-- Mostrar errores -->
-        <?php if (!empty($errores)): ?>
-            <div class="alert alert-danger">
-                <ul>
-                    <?php foreach ($errores as $error): ?>
-                        <li><?= htmlspecialchars($error) ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        <?php endif; ?>
-
         <!-- Botón agregar producto -->
         <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalAgregar">Agregar Producto</button>
 
@@ -88,6 +77,15 @@ session_start();
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
+                            <?php if ($modalActivo === 'editar_' . $producto['IdProducto'] && !empty($errores)): ?>
+                                <div class="alert alert-danger">
+                                    <ul class="mb-0">
+                                        <?php foreach ($errores as $error): ?>
+                                            <li><?= htmlspecialchars($error) ?></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
                             <input type="hidden" name="IdProducto" value="<?= $producto['IdProducto'] ?>">
                             <input type="hidden" name="IdImagen" value="<?= $producto['IdImagen'] ?>">
                             <div class="mb-3">
@@ -142,6 +140,15 @@ session_start();
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
+                        <?php if ($modalActivo === 'agregar' && !empty($errores)): ?>
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    <?php foreach ($errores as $error): ?>
+                                        <li><?= htmlspecialchars($error) ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
                         <div class="mb-3">
                             <label>Nombre</label>
                             <input type="text" name="Nombre" class="form-control" value="<?= htmlspecialchars($datosForm['Nombre'] ?? '') ?>">
