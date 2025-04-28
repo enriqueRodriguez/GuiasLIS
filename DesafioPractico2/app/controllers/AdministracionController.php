@@ -50,6 +50,8 @@ class AdministracionController extends Controller
             if (!is_numeric($data['Precio']) || $data['Precio'] <= 0) $errores[] = "El precio debe ser un número positivo";
             if (!ctype_digit($data['Cantidad']) || $data['Cantidad'] < 0) $errores[] = "Las existencias deben ser un número entero no negativo";
             if (empty($data['IdCategoria'])) $errores[] = "Categoría no válida";
+            // Nueva validación: imagen obligatoria
+            if (empty($_FILES['Imagen']['name'])) $errores[] = "Debe seleccionar una imagen para el producto";
 
             // Generar el nuevo ID de producto antes de guardar la imagen
             $nuevoId = $this->productoModel->generarNuevoId();
