@@ -75,12 +75,16 @@ $tipoUsuario = $_SESSION['tipo_usuario'] ?? null;
                             <td>$<?= number_format($producto['Precio'], 2) ?></td>
                             <td><?= $producto['Cantidad'] ?></td>
                             <td>
-                                <!-- Botón editar -->
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditar<?= $producto['IdProducto'] ?>">Editar</button>
-                                <!-- Form eliminar -->
+                                <!-- Editar -->
+                                <button class="btn btn-warning btn-sm me-1" title="Editar" data-bs-toggle="modal" data-bs-target="#modalEditar<?= $producto['IdProducto'] ?>">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <!-- Eliminar -->
                                 <form action="/Administracion/eliminar" method="post" style="display:inline;">
                                     <input type="hidden" name="IdProducto" value="<?= $producto['IdProducto'] ?>">
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar producto?')">Eliminar</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Eliminar" onclick="return confirm('¿Eliminar producto?')">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>

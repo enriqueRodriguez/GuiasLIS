@@ -67,13 +67,17 @@ $tipoUsuario = $_SESSION['tipo_usuario'] ?? null;
                                 <td>
                                     <?= $usuario['TipoUsuario'] == 1 ? 'Administrador' : 'Empleado' ?>
                                 </td>
-                                <td>
-                                    <!-- Botón editar -->
-                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditarUsuario<?= $usuario['IdUsuario'] ?>">Editar</button>
-                                    <!-- Form eliminar -->
+                                <td class="text-center">
+                                    <!-- Editar -->
+                                    <button class="btn btn-warning btn-sm me-1" title="Editar" data-bs-toggle="modal" data-bs-target="#modalEditarUsuario<?= $usuario['IdUsuario'] ?>">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <!-- Eliminar -->
                                     <form action="/Usuario/eliminar" method="post" style="display:inline;">
                                         <input type="hidden" name="IdUsuario" value="<?= $usuario['IdUsuario'] ?>">
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar usuario?')">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Eliminar" onclick="return confirm('¿Eliminar usuario?')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

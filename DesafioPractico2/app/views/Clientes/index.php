@@ -67,19 +67,25 @@ $tipoUsuario = $_SESSION['tipo_usuario'] ?? null;
                                 <td>
                                     <?= $usuario['Activo'] ? '<span class="badge bg-success">Activo</span>' : '<span class="badge bg-secondary">Inactivo</span>' ?>
                                 </td>
-                                <td>
-                                    <!-- Botón editar -->
-                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditarCliente<?= $usuario['IdUsuario'] ?>">Editar</button>
-                                    <!-- Form eliminar -->
+                                <td class="text-center">
+                                    <!-- Editar -->
+                                    <button class="btn btn-warning btn-sm me-1" title="Editar" data-bs-toggle="modal" data-bs-target="#modalEditarCliente<?= $usuario['IdUsuario'] ?>">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <!-- Eliminar -->
                                     <form action="/Clientes/eliminar" method="post" style="display:inline;">
                                         <input type="hidden" name="IdUsuario" value="<?= $usuario['IdUsuario'] ?>">
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar cliente?')">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger btn-sm me-1" title="Eliminar" onclick="return confirm('¿Eliminar cliente?')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
                                     </form>
-                                    <!-- Form activar/desactivar -->
+                                    <!-- Activar/Desactivar -->
                                     <form action="/Clientes/toggleActivo" method="post" style="display:inline;">
                                         <input type="hidden" name="IdUsuario" value="<?= $usuario['IdUsuario'] ?>">
-                                        <button type="submit" class="btn btn-sm <?= $usuario['Activo'] ? 'btn-secondary' : 'btn-success' ?>">
-                                            <?= $usuario['Activo'] ? 'Desactivar' : 'Activar' ?>
+                                        <button type="submit"
+                                            class="btn btn-sm <?= $usuario['Activo'] ? 'btn-secondary' : 'btn-success' ?>"
+                                            title="<?= $usuario['Activo'] ? 'Desactivar' : 'Activar' ?>">
+                                            <i class="bi <?= $usuario['Activo'] ? 'bi-person-dash' : 'bi-person-check' ?>"></i>
                                         </button>
                                     </form>
                                 </td>
