@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!empty($_SESSION['tipo_usuario'])) {
+    header('Location: /');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
