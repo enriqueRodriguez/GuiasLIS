@@ -22,7 +22,7 @@ $tipoUsuario = $_SESSION['tipo_usuario'] ?? null;
                     </span>
                     <a href="/Administracion/" class="btn btn-outline-light">Productos</a>
                     <?php if ($tipoUsuario == 1): ?>
-                        <a href="/Usuarios/" class="btn btn-outline-light">Usuarios</a>
+                        <a href="/Usuario/" class="btn btn-outline-light">Usuarios</a>
                         <a href="/Clientes/" class="btn btn-outline-light">Clientes</a>
                     <?php endif; ?>
                     <a href="/Usuario/logout" class="btn btn-outline-light">Cerrar Sesión</a>

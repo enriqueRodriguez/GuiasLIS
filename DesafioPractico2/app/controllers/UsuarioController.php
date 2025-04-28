@@ -87,4 +87,38 @@ class UsuarioController extends Controller
         header('Location: /');
         exit;
     }
+
+    public function agregar()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->model->create($_POST);
+            header('Location: /Usuario/index');
+            exit;
+        }
+    }
+
+    public function editar()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = $_POST;
+            $id = $data['IdUsuario'];
+            unset($data['IdUsuario']);
+            // Si la contraseña está vacía, no la actualices
+            if (empty($data['Password'])) {
+                unset($data['Password']);
+            }
+            $this->model->update($id, $data);
+            header('Location: /Usuario/index');
+            exit;
+        }
+    }
+
+    public function eliminar()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['IdUsuario'])) {
+            $this->model->delete($_POST['IdUsuario']);
+            header('Location: /Usuario/index');
+            exit;
+        }
+    }
 }
