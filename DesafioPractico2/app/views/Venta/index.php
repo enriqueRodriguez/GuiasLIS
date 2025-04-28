@@ -1,6 +1,10 @@
 <?php
 session_start();
 $tipoUsuario = $_SESSION['tipo_usuario'] ?? null;
+if ($tipoUsuario !== 1 && $tipoUsuario !== 2) {
+    header('Location: /');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
