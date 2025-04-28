@@ -1,12 +1,7 @@
 <?php
-include_once __DIR__ . '/../app/controllers/CategoriaController.php';
-include_once __DIR__ . '/../app/controllers/ImagenController.php';
 include_once __DIR__ . '/../app/controllers/ProductosController.php';
-include_once __DIR__ . '/../app/controllers/TipoImagenController.php';
-include_once __DIR__ . '/../app/controllers/TipoUsuarioController.php';
 include_once __DIR__ . '/../app/controllers/UsuarioController.php';
 include_once __DIR__ . '/../app/controllers/VentaController.php';
-include_once __DIR__ . '/../app/controllers/VentaProductoController.php';
 include_once __DIR__ . '/../app/controllers/IndexController.php';
 include_once __DIR__ . '/../app/controllers/AdministracionController.php';
 
