@@ -74,4 +74,9 @@ class Usuario extends Model
     {
         return $this->set_query("DELETE FROM Usuarios WHERE IdUsuario = ?", [$id]);
     }
+
+    public function setActivo($id, $activo)
+    {
+        return $this->set_query("UPDATE Usuarios SET Activo = ? WHERE IdUsuario = ?", [$activo, $id]);
+    }
 }

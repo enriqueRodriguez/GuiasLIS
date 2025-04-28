@@ -52,6 +52,7 @@ $tipoUsuario = $_SESSION['tipo_usuario'] ?? null;
                         <th>Usuario</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -64,12 +65,22 @@ $tipoUsuario = $_SESSION['tipo_usuario'] ?? null;
                                 <td><?= htmlspecialchars($usuario['Nombre']) ?></td>
                                 <td><?= htmlspecialchars($usuario['Apellido']) ?></td>
                                 <td>
+                                    <?= $usuario['Activo'] ? '<span class="badge bg-success">Activo</span>' : '<span class="badge bg-secondary">Inactivo</span>' ?>
+                                </td>
+                                <td>
                                     <!-- Botón editar -->
                                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditarCliente<?= $usuario['IdUsuario'] ?>">Editar</button>
                                     <!-- Form eliminar -->
                                     <form action="/Clientes/eliminar" method="post" style="display:inline;">
                                         <input type="hidden" name="IdUsuario" value="<?= $usuario['IdUsuario'] ?>">
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar cliente?')">Eliminar</button>
+                                    </form>
+                                    <!-- Form activar/desactivar -->
+                                    <form action="/Clientes/toggleActivo" method="post" style="display:inline;">
+                                        <input type="hidden" name="IdUsuario" value="<?= $usuario['IdUsuario'] ?>">
+                                        <button type="submit" class="btn btn-sm <?= $usuario['Activo'] ? 'btn-secondary' : 'btn-success' ?>">
+                                            <?= $usuario['Activo'] ? 'Desactivar' : 'Activar' ?>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

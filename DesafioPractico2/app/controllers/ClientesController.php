@@ -70,4 +70,18 @@ class ClientesController extends Controller
             exit;
         }
     }
+
+    public function toggleActivo()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['IdUsuario'])) {
+            $usuario = $this->model->getById($_POST['IdUsuario']);
+            if ($usuario) {
+                $nuevoEstado = $usuario['Activo'] ? 0 : 1;
+                $this->model->setActivo($usuario['IdUsuario'], $nuevoEstado);
+                $_SESSION['mensaje_exito'] = $nuevoEstado ? "Cliente activado." : "Cliente desactivado.";
+            }
+            header('Location: /Clientes/index');
+            exit;
+        }
+    }
 }
