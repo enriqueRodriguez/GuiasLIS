@@ -68,6 +68,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         // Muestra el error
                         loginError.textContent = data.error || 'Error desconocido';
                         loginError.classList.remove('d-none');
+                        // Limpiar el input de password
+                        const passwordInput = document.getElementById('password');
+                        if (passwordInput) passwordInput.value = '';
+                        passwordInput.focus();
                     }
                 })
                 .catch(() => {
