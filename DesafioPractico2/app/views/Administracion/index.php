@@ -1,5 +1,6 @@
 <?php
 session_start();
+$tipoUsuario = $_SESSION['tipo_usuario'] ?? null;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,8 +15,18 @@ session_start();
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="/">TextilExport</a>
-            <div class="ms-auto">
-                <a href="/Usuario/logout" class="btn btn-outline-light">Cerrar Sesión</a>
+            <div class="ms-auto d-flex gap-2 align-items-center">
+                <?php if ($tipoUsuario): ?>
+                    <span class="text-white fw-bold">
+                        <?= htmlspecialchars(($_SESSION['nombre'] ?? '') . ' ' . ($_SESSION['apellido'] ?? '')) ?>
+                    </span>
+                    <a href="/Ventas/index" class="btn btn-outline-light">Ventas</a>
+                    <?php if ($tipoUsuario == 1): ?>
+                        <a href="/Usuarios/index" class="btn btn-outline-light">Usuarios</a>
+                        <a href="/Clientes/index" class="btn btn-outline-light">Clientes</a>
+                    <?php endif; ?>
+                    <a href="/Usuario/logout" class="btn btn-outline-light">Cerrar Sesión</a>
+                <?php endif; ?>
             </div>
         </div>
     </nav>
@@ -32,7 +43,9 @@ session_start();
 
         <!-- Botón agregar producto -->
         <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalAgregar">Agregar Producto</button>
-        <button class="btn btn-secondary mb-3 ms-2" data-bs-toggle="modal" data-bs-target="#modalCategorias">Administrar Categorías</button>
+        <?php if ($tipoUsuario == 1): ?>
+            <button class="btn btn-secondary mb-3 ms-2" data-bs-toggle="modal" data-bs-target="#modalCategorias">Administrar Categorías</button>
+        <?php endif; ?>
 
         <!-- Tabla de productos -->
         <div class="table-responsive">
@@ -198,47 +211,49 @@ session_start();
         </div>
 
         <!-- Modal Administrar Categorías -->
-        <div class="modal fade" id="modalCategorias" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Administrar Categorías</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <label for="nuevaCategoria" class="form-label">Nueva Categoría</label>
-                        <!-- Formulario SOLO para agregar -->
-                        <form action="/Administracion/agregarCategoria" method="post" class="input-group mb-3">
-                            <input type="text" name="Descripcion" id="nuevaCategoria" class="form-control" placeholder="Nombre de la categoría" required>
-                            <button type="submit" class="btn btn-success">Agregar</button>
-                        </form>
-                        <hr>
-                        <h6>Categorías existentes</h6>
-                        <ul class="list-group">
-                            <?php foreach ($categorias as $cat): ?>
-                                <li class="list-group-item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <!-- Formulario para editar -->
-                                        <form action="/Administracion/editarCategoria" method="post" class="d-flex align-items-center" style="gap: 0.5rem; flex:1;">
-                                            <input type="hidden" name="IdCategoria" value="<?= $cat['IdCategoria'] ?>">
-                                            <input type="text" name="Descripcion" value="<?= htmlspecialchars($cat['Descripcion']) ?>" class="form-control form-control-sm" required style="max-width: 200px;">
-                                            <button type="submit" class="btn btn-sm btn-primary ms-2">Guardar</button>
-                                        </form>
-                                        <!-- Formulario para eliminar -->
-                                        <form action="/Administracion/eliminarCategoria" method="post" style="margin-left: 0.5rem;">
-                                            <input type="hidden" name="IdCategoria" value="<?= $cat['IdCategoria'] ?>">
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar esta categoría?')">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
+        <?php if ($tipoUsuario == 1): ?>
+            <div class="modal fade" id="modalCategorias" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Administrar Categorías</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="nuevaCategoria" class="form-label">Nueva Categoría</label>
+                            <!-- Formulario SOLO para agregar -->
+                            <form action="/Administracion/agregarCategoria" method="post" class="input-group mb-3">
+                                <input type="text" name="Descripcion" id="nuevaCategoria" class="form-control" placeholder="Nombre de la categoría" required>
+                                <button type="submit" class="btn btn-success">Agregar</button>
+                            </form>
+                            <hr>
+                            <h6>Categorías existentes</h6>
+                            <ul class="list-group">
+                                <?php foreach ($categorias as $cat): ?>
+                                    <li class="list-group-item">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <!-- Formulario para editar -->
+                                            <form action="/Administracion/editarCategoria" method="post" class="d-flex align-items-center" style="gap: 0.5rem; flex:1;">
+                                                <input type="hidden" name="IdCategoria" value="<?= $cat['IdCategoria'] ?>">
+                                                <input type="text" name="Descripcion" value="<?= htmlspecialchars($cat['Descripcion']) ?>" class="form-control form-control-sm" required style="max-width: 200px;">
+                                                <button type="submit" class="btn btn-sm btn-primary ms-2">Guardar</button>
+                                            </form>
+                                            <!-- Formulario para eliminar -->
+                                            <form action="/Administracion/eliminarCategoria" method="post" style="margin-left: 0.5rem;">
+                                                <input type="hidden" name="IdCategoria" value="<?= $cat['IdCategoria'] ?>">
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar esta categoría?')">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>
     </main>
     <?php if ($modalActivo): ?>
         <script>

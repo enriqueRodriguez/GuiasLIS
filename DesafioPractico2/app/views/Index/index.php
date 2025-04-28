@@ -23,7 +23,7 @@
                         <?php echo htmlspecialchars($_SESSION['nombre'] . ' ' . $_SESSION['apellido']); ?>
                     </span>
                     <?php if ($tipoUsuario === 1 || $tipoUsuario === 2): ?>
-                        <a href="admin/login.php" class="btn btn-outline-light">Administrador</a>
+                        <a href="/Administracion" class="btn btn-outline-light">Administrador</a>
                     <?php endif; ?>
                     <form action="/Usuario/logout" method="post" class="d-inline">
                         <button type="submit" class="btn btn-outline-light">Cerrar sesión</button>
