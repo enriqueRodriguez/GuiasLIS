@@ -41,6 +41,14 @@ $tipoUsuario = $_SESSION['tipo_usuario'] ?? null;
             <?php unset($_SESSION['mensaje_error']); ?>
         <?php endif; ?>
 
+        <?php if (!empty($_SESSION['mensaje_exito'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= htmlspecialchars($_SESSION['mensaje_exito']) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+            <?php unset($_SESSION['mensaje_exito']); ?>
+        <?php endif; ?>
+
         <!-- Botón agregar usuario -->
         <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalAgregarUsuario">Agregar Usuario</button>
 
