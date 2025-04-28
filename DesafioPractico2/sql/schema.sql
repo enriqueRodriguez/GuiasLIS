@@ -22,7 +22,8 @@ CREATE TABLE TipoImagen (
 -- Agregar valores por defecto a la tabla TipoImagen
 INSERT INTO TipoImagen (Descripcion) VALUES 
 ('Carrusel'),
-('Productos');
+('Productos'),
+('Usuarios');
 
 -- Tabla Imagenes
 CREATE TABLE Imagenes (
