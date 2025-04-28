@@ -370,8 +370,9 @@
                         </div>
                         <div id="loginError" class="alert alert-danger d-none"></div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer d-flex flex-column gap-2">
                         <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                        <a href="/Clientes/registrar" class="btn btn-outline-secondary w-100">Registrarse como Cliente</a>
                     </div>
                 </form>
             </div>

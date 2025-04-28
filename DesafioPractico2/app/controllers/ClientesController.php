@@ -17,6 +17,12 @@ class ClientesController extends Controller
         $this->render('index.php', ['usuarios' => $usuarios]);
     }
 
+    public function registrar()
+    {
+        $usuarios = $this->model->getAll();
+        $this->render('registrar.php');
+    }
+
     public function agregar()
     {
         session_start();
@@ -31,6 +37,24 @@ class ClientesController extends Controller
             $this->model->create($_POST);
             $_SESSION['mensaje_exito'] = "Usuario agregado correctamente.";
             header('Location: /Clientes/index');
+            exit;
+        }
+    }
+
+    public function agregarCliente()
+    {
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Usa el modelo para buscar si el usuario ya existe
+            $usuarioExistente = $this->model->getByUsername($_POST['Username']);
+            if ($usuarioExistente) {
+                $_SESSION['mensaje_error'] = "El usuario ya existe.";
+                header('Location: /Clientes/registrar');
+                exit;
+            }
+            $this->model->create($_POST);
+            $_SESSION['mensaje_exito'] = "¡Cliente registrado correctamente!";
+            header('Location: /');
             exit;
         }
     }
@@ -64,8 +88,10 @@ class ClientesController extends Controller
 
     public function eliminar()
     {
+        session_start();
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['IdUsuario'])) {
             $this->model->delete($_POST['IdUsuario']);
+            $_SESSION['mensaje_exito'] = "Cliente eliminado correctamente.";
             header('Location: /Clientes/index');
             exit;
         }
