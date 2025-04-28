@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/../app/controllers/ProductosController.php';
 include_once __DIR__ . '/../app/controllers/UsuarioController.php';
+include_once __DIR__ . '/../app/controllers/ClientesController.php';
 include_once __DIR__ . '/../app/controllers/VentaController.php';
 include_once __DIR__ . '/../app/controllers/IndexController.php';
 include_once __DIR__ . '/../app/controllers/AdministracionController.php';
