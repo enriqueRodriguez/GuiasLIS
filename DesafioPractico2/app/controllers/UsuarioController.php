@@ -90,8 +90,17 @@ class UsuarioController extends Controller
 
     public function agregar()
     {
+        session_start();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Usa el modelo para buscar si el usuario ya existe
+            $usuarioExistente = $this->model->getByUsername($_POST['Username']);
+            if ($usuarioExistente) {
+                $_SESSION['mensaje_error'] = "El usuario ya existe.";
+                header('Location: /Usuario/index');
+                exit;
+            }
             $this->model->create($_POST);
+            $_SESSION['mensaje_exito'] = "Usuario agregado correctamente.";
             header('Location: /Usuario/index');
             exit;
         }
@@ -99,15 +108,26 @@ class UsuarioController extends Controller
 
     public function editar()
     {
+        session_start();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = $_POST;
-            $id = $data['IdUsuario'];
-            unset($data['IdUsuario']);
+            $id = $_POST['IdUsuario'];
+            $username = $_POST['Username'];
+
+            // Verifica si el nuevo username ya existe en otro usuario
+            $usuarioExistente = $this->model->getByUsername($username);
+            if ($usuarioExistente && $usuarioExistente['IdUsuario'] != $id) {
+                $_SESSION['mensaje_error'] = "El usuario ya existe.";
+                header('Location: /Usuario/index');
+                exit;
+            }
+
             // Si la contraseña está vacía, no la actualices
+            $data = $_POST;
             if (empty($data['Password'])) {
                 unset($data['Password']);
             }
             $this->model->update($id, $data);
+            $_SESSION['mensaje_exito'] = "Usuario actualizado correctamente.";
             header('Location: /Usuario/index');
             exit;
         }

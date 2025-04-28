@@ -33,6 +33,14 @@ $tipoUsuario = $_SESSION['tipo_usuario'] ?? null;
     <main class="container my-5">
         <h1 class="mb-4">Administración de Usuarios</h1>
 
+        <?php if (!empty($_SESSION['mensaje_error'])): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?= htmlspecialchars($_SESSION['mensaje_error']) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+            <?php unset($_SESSION['mensaje_error']); ?>
+        <?php endif; ?>
+
         <!-- Botón agregar usuario -->
         <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalAgregarUsuario">Agregar Usuario</button>
 

@@ -21,6 +21,11 @@ class Usuario extends Model
         )[0] ?? null;
     }
 
+    public function getByUsername($username)
+    {
+        return $this->get_query("SELECT * FROM Usuarios WHERE Username = ?", [$username])[0] ?? null;
+    }
+
     public function create($data)
     {
         return $this->set_query(
