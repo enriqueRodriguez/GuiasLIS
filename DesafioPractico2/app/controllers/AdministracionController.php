@@ -163,4 +163,37 @@ class AdministracionController extends Controller
             exit;
         }
     }
+
+    public function agregarCategoria()
+    {
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['Descripcion'])) {
+            $this->categoriaModel->create($_POST['Descripcion']);
+            $_SESSION['mensaje_exito'] = "Categoría agregada correctamente.";
+        }
+        header('Location: /Administracion/index');
+        exit;
+    }
+
+    public function eliminarCategoria()
+    {
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['IdCategoria'])) {
+            $this->categoriaModel->delete($_POST['IdCategoria']);
+            $_SESSION['mensaje_exito'] = "Categoría eliminada correctamente.";
+        }
+        header('Location: /Administracion/index');
+        exit;
+    }
+
+    public function editarCategoria()
+    {
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['IdCategoria']) && !empty($_POST['Descripcion'])) {
+            $this->categoriaModel->update($_POST['IdCategoria'], $_POST['Descripcion']);
+            $_SESSION['mensaje_exito'] = "Categoría modificada correctamente.";
+        }
+        header('Location: /Administracion/index');
+        exit;
+    }
 }

@@ -22,8 +22,17 @@ session_start();
     <main class="container my-5">
         <h1 class="mb-4">Gestión de Productos</h1>
 
+        <?php if (!empty($_SESSION['mensaje_exito'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= htmlspecialchars($_SESSION['mensaje_exito']) ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            </div>
+            <?php unset($_SESSION['mensaje_exito']); ?>
+        <?php endif; ?>
+
         <!-- Botón agregar producto -->
         <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalAgregar">Agregar Producto</button>
+        <button class="btn btn-secondary mb-3 ms-2" data-bs-toggle="modal" data-bs-target="#modalCategorias">Administrar Categorías</button>
 
         <!-- Tabla de productos -->
         <div class="table-responsive">
@@ -185,6 +194,49 @@ session_start();
                         <button type="submit" class="btn btn-primary">Guardar Producto</button>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <!-- Modal Administrar Categorías -->
+        <div class="modal fade" id="modalCategorias" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Administrar Categorías</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="nuevaCategoria" class="form-label">Nueva Categoría</label>
+                        <!-- Formulario SOLO para agregar -->
+                        <form action="/Administracion/agregarCategoria" method="post" class="input-group mb-3">
+                            <input type="text" name="Descripcion" id="nuevaCategoria" class="form-control" placeholder="Nombre de la categoría" required>
+                            <button type="submit" class="btn btn-success">Agregar</button>
+                        </form>
+                        <hr>
+                        <h6>Categorías existentes</h6>
+                        <ul class="list-group">
+                            <?php foreach ($categorias as $cat): ?>
+                                <li class="list-group-item">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <!-- Formulario para editar -->
+                                        <form action="/Administracion/editarCategoria" method="post" class="d-flex align-items-center" style="gap: 0.5rem; flex:1;">
+                                            <input type="hidden" name="IdCategoria" value="<?= $cat['IdCategoria'] ?>">
+                                            <input type="text" name="Descripcion" value="<?= htmlspecialchars($cat['Descripcion']) ?>" class="form-control form-control-sm" required style="max-width: 200px;">
+                                            <button type="submit" class="btn btn-sm btn-primary ms-2">Guardar</button>
+                                        </form>
+                                        <!-- Formulario para eliminar -->
+                                        <form action="/Administracion/eliminarCategoria" method="post" style="margin-left: 0.5rem;">
+                                            <input type="hidden" name="IdCategoria" value="<?= $cat['IdCategoria'] ?>">
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar esta categoría?')">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

@@ -17,4 +17,14 @@ class Categoria extends Model
     {
         return $this->set_query("INSERT INTO Categorias (Descripcion) VALUES (?)", [$descripcion]);
     }
+
+    public function delete($id)
+    {
+        return $this->set_query("DELETE FROM Categorias WHERE IdCategoria = ?", [$id]);
+    }
+
+    public function update($id, $descripcion)
+    {
+        return $this->set_query("UPDATE Categorias SET Descripcion = ? WHERE IdCategoria = ?", [$descripcion, $id]);
+    }
 }
